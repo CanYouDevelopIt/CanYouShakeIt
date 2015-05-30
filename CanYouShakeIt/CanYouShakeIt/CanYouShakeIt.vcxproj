@@ -99,6 +99,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\OpenCV2411\opencv\build\include\opencv2;C:\OpenCV2411\opencv\build\include\opencv;C:\OpenCV2411\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>C:\OpenCV2411\opencv\build\include\opencv2;C:\OpenCV2411\opencv\build\include\opencv;C:\OpenCV2411\opencv\build\include;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -146,6 +147,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Tracking.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Images\ne.png" />
+    <Image Include="Images\no.png" />
+    <Image Include="Images\se.png" />
+    <Image Include="Images\so.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
