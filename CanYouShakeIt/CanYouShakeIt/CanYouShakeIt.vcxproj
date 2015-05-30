@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Test.cpp" />
     <ClCompile Include="Tracking.cpp" />
   </ItemGroup>
   <ItemGroup>
