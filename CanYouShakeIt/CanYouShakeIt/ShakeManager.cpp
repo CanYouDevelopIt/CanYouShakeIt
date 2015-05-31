@@ -10,7 +10,6 @@
 using namespace std;
 using namespace cv;
 
-
 const static int SENSITIVITY_VALUE = 40;
 const static int BLUR_SIZE = 20;
 int theObject[2] = { 0, 0 };

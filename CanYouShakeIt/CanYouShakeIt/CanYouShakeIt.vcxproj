@@ -146,8 +146,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Piste.cpp" />
     <ClCompile Include="PlayMusic.cpp" />
-    <ClCompile Include="Test.cpp" />
+    <ClCompile Include="ShakeManager.cpp" />
     <ClCompile Include="Tracking.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +159,9 @@
   </ItemGroup>
   <ItemGroup>
     <Media Include="Music\Son.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Piste.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
