@@ -23,7 +23,7 @@ string intToString(int number){
 	return ss.str();
 }
 
-void searchForMovement(Mat thresholdImage, Mat &cameraFeed){
+void searchForMovement(Mat thresholdImage, Mat &cameraFeed, Rect const &fleche){
 	bool objectDetected = false;
 	Mat temp;
 	thresholdImage.copyTo(temp);
@@ -53,7 +53,8 @@ void searchForMovement(Mat thresholdImage, Mat &cameraFeed){
 	line(cameraFeed, Point(x, y), Point(x + 30, y), Scalar(0, 255, 0), 2);
 	putText(cameraFeed, "(" + intToString(x) + "," + intToString(y) + ")", Point(x, y), 1, 1, Scalar(255, 0, 0), 2);
 
-
+	if (x >= fleche.x && x < (fleche.x + 70) && y >= fleche.y && y < (fleche.y + 70)){
+	}
 
 }
 
@@ -72,6 +73,7 @@ int main(){
 		cerr << "Error opening the webcam!" << endl;
 		return -1;
 	}
+
 	Mat imageno = imread("Images/no.png", 0);
 	Mat imagene = imread("Images/ne.png", 0);
 	Mat imagese = imread("Images/se.png", 0);
@@ -89,7 +91,6 @@ int main(){
 
 	for (;;){
 
-
 		capture.read(frame1);
 		cvtColor(frame1, grayImage1, COLOR_BGR2GRAY);
 
@@ -103,12 +104,18 @@ int main(){
 
 		threshold(thresholdImage, thresholdImage, SENSITIVITY_VALUE, 255, THRESH_BINARY);
 
+		Rect no = Rect(0, 0, 70, 70);
+		Rect so = Rect(0, frame1.rows - 70, 70, 70);
+		Rect ne = Rect(frame1.cols - 70, 0, 70, 70);
+		Rect se = Rect(frame1.cols - 70, frame1.rows - 70, 70, 70);
+
 		if (trackingEnabled){
-			searchForMovement(thresholdImage, frame1);
+			searchForMovement(thresholdImage, frame1, se);
 		}
 
 		Mat newFrame = frame1.clone();
 		int cx = (newFrame.cols - 70) / 2;
+
 		if (!imageno.empty() && !imagene.empty() && !imagese.empty() && !imageso.empty()) {
 
 			Mat srcBGRno = Mat(imageno.size(), CV_8UC3);
@@ -121,11 +128,6 @@ int main(){
 			cvtColor(imageso, srcBGRso, CV_GRAY2BGR);
 			cvtColor(imagese, srcBGRse, CV_GRAY2BGR);
 
-			Rect no = Rect(0, 0, 70, 70);
-			Rect so = Rect(0, newFrame.rows - 70, 70, 70);
-			Rect ne = Rect(newFrame.cols -70, 0, 70, 70);
-			Rect se = Rect(newFrame.cols - 70, newFrame.rows - 70, 70, 70);
-
 			Mat on = newFrame(no);
 			Mat os = newFrame(so);
 			Mat en = newFrame(ne);
@@ -135,35 +137,37 @@ int main(){
 			srcBGRso.copyTo(os);
 			srcBGRne.copyTo(en);
 			srcBGRse.copyTo(es);
+
 		}
+
 		imshow("frame", newFrame);
 		
 		switch (waitKey(10)){                                  
 
-		case 27:
-			return 0;
-		case 116: 
-			PlaySound(TEXT("Music/Son.wav"), NULL, SND_ASYNC);
-			trackingEnabled = !trackingEnabled;
-			if (trackingEnabled == false) cout << "Tracking" << endl;
-			else cout << "Riennn" << endl;
-			break;
-		case 112:
-			pause = !pause;
-			if (pause == true){
-				cout << "Code paused, press 'p' again to resume" << endl;
-				while (pause == true){
+			case 27:
+				return 0;
+			case 116: 
+				//PlaySound(TEXT("Music/Son.wav"), NULL, SND_ASYNC);
+				trackingEnabled = !trackingEnabled;
+				if (trackingEnabled == false) cout << "Tracking" << endl;
+				else cout << "Riennn" << endl;
+				break;
+			case 112:
+				pause = !pause;
+				if (pause == true){
+					cout << "Code paused, press 'p' again to resume" << endl;
+					while (pause == true){
 					
-					switch (waitKey()){
+						switch (waitKey()){
 						
-					case 112:
+						case 112:
 						
-						pause = false;
-						cout << "Code resumed." << endl;
-						break;
+							pause = false;
+							cout << "Code resumed." << endl;
+							break;
+						}
 					}
 				}
-			}
 
 
 		}
