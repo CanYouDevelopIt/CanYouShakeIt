@@ -54,6 +54,7 @@ void searchForMovement(Mat thresholdImage, Mat &cameraFeed, Rect const &fleche){
 	putText(cameraFeed, "(" + intToString(x) + "," + intToString(y) + ")", Point(x, y), 1, 1, Scalar(255, 0, 0), 2);
 
 	if (x >= fleche.x && x < (fleche.x + 70) && y >= fleche.y && y < (fleche.y + 70)){
+		cout << "PERFECT" << endl;
 	}
 
 }
