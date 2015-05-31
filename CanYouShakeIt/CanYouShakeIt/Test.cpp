@@ -4,6 +4,8 @@
 #include<opencv2/imgproc/imgproc.hpp>
 #include<iostream>
 #include<vector>
+#include<Windows.h>
+#include<MMSystem.h>
 
 using namespace std;
 using namespace cv;
@@ -85,9 +87,9 @@ int main(){
 	cv::resize(imageso, imageso, Size(70, 70));
 	Mat frame1, frame2;
 
-
-
 	for (;;){
+
+
 		capture.read(frame1);
 		cvtColor(frame1, grayImage1, COLOR_BGR2GRAY);
 
@@ -141,6 +143,7 @@ int main(){
 		case 27:
 			return 0;
 		case 116: 
+			PlaySound(TEXT("Music/Son.wav"), NULL, SND_ASYNC);
 			trackingEnabled = !trackingEnabled;
 			if (trackingEnabled == false) cout << "Tracking" << endl;
 			else cout << "Riennn" << endl;
