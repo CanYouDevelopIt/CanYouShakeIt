@@ -149,7 +149,6 @@
     <ClCompile Include="Piste.cpp" />
     <ClCompile Include="PlayMusic.cpp" />
     <ClCompile Include="ShakeManager.cpp" />
-    <ClCompile Include="Tracking.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Images\ne.png" />

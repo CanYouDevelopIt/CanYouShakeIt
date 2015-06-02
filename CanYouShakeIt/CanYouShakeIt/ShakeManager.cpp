@@ -10,17 +10,10 @@
 using namespace std;
 using namespace cv;
 
-int theObject[2] = { 0, 0 };
-Rect objectBoundingRectangle = Rect(0, 0, 0, 0);
+int tabPosMouv[2] = { 0, 0 };
+Rect rectangleContour = Rect(0, 0, 0, 0);
 
-string intToString(int number){
-
-	stringstream ss;
-	ss << number;
-	return ss.str();
-}
-
-void rechercherMouvement(Mat thresholdImage, Mat &cameraFeed, Rect const &fleche){
+void rechercherMouvement(Mat thresholdImage, Mat &flux, Rect const &fleche){
 	bool mouvementDetecte = false;
 	Mat temp;
 	thresholdImage.copyTo(temp);
@@ -32,23 +25,23 @@ void rechercherMouvement(Mat thresholdImage, Mat &cameraFeed, Rect const &fleche
 	else mouvementDetecte = false;
 
 	if (mouvementDetecte){
-		vector< vector<Point> > largestContourVec;
-		largestContourVec.push_back(contours.at(contours.size() - 1));
-		objectBoundingRectangle = boundingRect(largestContourVec.at(0));
+		vector< vector<Point> > maxContourVec;
+		maxContourVec.push_back(contours.at(contours.size() - 1));
+		rectangleContour = boundingRect(maxContourVec.at(0));
 
-		int xpos = objectBoundingRectangle.x + objectBoundingRectangle.width / 2;
-		int ypos = objectBoundingRectangle.y + objectBoundingRectangle.height / 2;
+		int xpos = rectangleContour.x + rectangleContour.width / 2;
+		int ypos = rectangleContour.y + rectangleContour.height / 2;
 
-		theObject[0] = xpos, theObject[1] = ypos;
+		tabPosMouv[0] = xpos, tabPosMouv[1] = ypos;
 	}
 
-	int x = theObject[0];
-	int y = theObject[1];
+	int x = tabPosMouv[0];
+	int y = tabPosMouv[1];
 
-	line(cameraFeed, Point(x, y), Point(x, y - 10), Scalar(0, 255, 0));
-	line(cameraFeed, Point(x, y), Point(x, y + 10), Scalar(0, 255, 0));
-	line(cameraFeed, Point(x, y), Point(x - 10, y), Scalar(0, 255, 0));
-	line(cameraFeed, Point(x, y), Point(x + 10, y), Scalar(0, 255, 0));
+	line(flux, Point(x, y), Point(x, y - 10), Scalar(0, 255, 0));
+	line(flux, Point(x, y), Point(x, y + 10), Scalar(0, 255, 0));
+	line(flux, Point(x, y), Point(x - 10, y), Scalar(0, 255, 0));
+	line(flux, Point(x, y), Point(x + 10, y), Scalar(0, 255, 0));
 
 	if (x >= fleche.x && x < (fleche.x + 70) && y >= fleche.y && y < (fleche.y + 70)){
 		cout << "PERFECT" << endl;
