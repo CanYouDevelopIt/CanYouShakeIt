@@ -10,47 +10,45 @@
 using namespace std;
 using namespace cv;
 
-const static int SENSITIVITY_VALUE = 40;
-const static int BLUR_SIZE = 20;
 int theObject[2] = { 0, 0 };
 Rect objectBoundingRectangle = Rect(0, 0, 0, 0);
 
 string intToString(int number){
 
-	std::stringstream ss;
+	stringstream ss;
 	ss << number;
 	return ss.str();
 }
 
-void searchForMovement(Mat thresholdImage, Mat &cameraFeed, Rect const &fleche){
-	bool objectDetected = false;
+void rechercherMouvement(Mat thresholdImage, Mat &cameraFeed, Rect const &fleche){
+	bool mouvementDetecte = false;
 	Mat temp;
 	thresholdImage.copyTo(temp);
 	vector< vector<Point> > contours;
 	vector<Vec4i> hierarchy;
 	findContours(temp, contours, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
 
-	if (contours.size()>0)objectDetected = true;
-	else objectDetected = false;
+	if (contours.size()>0)mouvementDetecte = true;
+	else mouvementDetecte = false;
 
-	if (objectDetected){
+	if (mouvementDetecte){
 		vector< vector<Point> > largestContourVec;
 		largestContourVec.push_back(contours.at(contours.size() - 1));
 		objectBoundingRectangle = boundingRect(largestContourVec.at(0));
+
 		int xpos = objectBoundingRectangle.x + objectBoundingRectangle.width / 2;
 		int ypos = objectBoundingRectangle.y + objectBoundingRectangle.height / 2;
 
-
 		theObject[0] = xpos, theObject[1] = ypos;
 	}
+
 	int x = theObject[0];
 	int y = theObject[1];
-	circle(cameraFeed, Point(x, y), 30, Scalar(0, 255, 0), 2);
-	line(cameraFeed, Point(x, y), Point(x, y - 30), Scalar(0, 255, 0), 2);
-	line(cameraFeed, Point(x, y), Point(x, y + 30), Scalar(0, 255, 0), 2);
-	line(cameraFeed, Point(x, y), Point(x - 30, y), Scalar(0, 255, 0), 2);
-	line(cameraFeed, Point(x, y), Point(x + 30, y), Scalar(0, 255, 0), 2);
-	putText(cameraFeed, "(" + intToString(x) + "," + intToString(y) + ")", Point(x, y), 1, 1, Scalar(255, 0, 0), 2);
+
+	line(cameraFeed, Point(x, y), Point(x, y - 10), Scalar(0, 255, 0));
+	line(cameraFeed, Point(x, y), Point(x, y + 10), Scalar(0, 255, 0));
+	line(cameraFeed, Point(x, y), Point(x - 10, y), Scalar(0, 255, 0));
+	line(cameraFeed, Point(x, y), Point(x + 10, y), Scalar(0, 255, 0));
 
 	if (x >= fleche.x && x < (fleche.x + 70) && y >= fleche.y && y < (fleche.y + 70)){
 		cout << "PERFECT" << endl;
@@ -59,8 +57,7 @@ void searchForMovement(Mat thresholdImage, Mat &cameraFeed, Rect const &fleche){
 }
 
 int main(){
-	bool objectDetected = false;
-	bool trackingEnabled = false;
+	bool trackingMouvement = false;
 	bool pause = false;
 	Mat grayImage1, grayImage2;
 	Mat differenceImage;
@@ -70,7 +67,7 @@ int main(){
 	capture.open(0);
 
 	if (!capture.isOpened()){
-		cerr << "Error opening the webcam!" << endl;
+		cerr << "Une erreur est survenue lors de l'activation de la webcam." << endl;
 		return -1;
 	}
 
@@ -78,11 +75,13 @@ int main(){
 	Mat imagene = imread("Images/ne.png", 0);
 	Mat imagese = imread("Images/se.png", 0);
 	Mat imageso = imread("Images/so.png", 0);
+
 	if (!imageno.data && !imagene.data && !imagese.data && !imageso.data)                              // Check for invalid input
 	{
-		cout << "Could not open or find the image" << std::endl;
+		cout << "Pas d'image" << std::endl;
 		return -1;
 	}
+
 	cv::resize(imageno, imageno, Size(70, 70));
 	cv::resize(imagene, imagene, Size(70, 70));
 	cv::resize(imagese, imagese, Size(70, 70));
@@ -98,19 +97,16 @@ int main(){
 		cvtColor(frame2, grayImage2, COLOR_BGR2GRAY);
 
 		absdiff(grayImage1, grayImage2, differenceImage);
-		threshold(differenceImage, thresholdImage, SENSITIVITY_VALUE, 255, THRESH_BINARY);
-
-		blur(thresholdImage, thresholdImage, cv::Size(BLUR_SIZE, BLUR_SIZE));
-
-		threshold(thresholdImage, thresholdImage, SENSITIVITY_VALUE, 255, THRESH_BINARY);
+		threshold(differenceImage, thresholdImage, 40, 255, THRESH_BINARY);
+		threshold(thresholdImage, thresholdImage, 40, 255, THRESH_BINARY);
 
 		Rect no = Rect(0, 0, 70, 70);
 		Rect so = Rect(0, frame1.rows - 70, 70, 70);
 		Rect ne = Rect(frame1.cols - 70, 0, 70, 70);
 		Rect se = Rect(frame1.cols - 70, frame1.rows - 70, 70, 70);
 
-		if (trackingEnabled){
-			searchForMovement(thresholdImage, frame1, se);
+		if (trackingMouvement){
+			rechercherMouvement(thresholdImage, frame1, se);
 		}
 
 		Mat newFrame = frame1.clone();
@@ -140,34 +136,32 @@ int main(){
 
 		}
 
-		imshow("frame", newFrame);
-		
-		switch (waitKey(10)){                                  
+		imshow("Can You Shake It ?", newFrame);
 
-			case 27:
-				return 0;
-			case 116: 
-				//PlaySound(TEXT("Music/Son.wav"), NULL, SND_ASYNC);
-				trackingEnabled = !trackingEnabled;
-				if (trackingEnabled == false) cout << "Tracking" << endl;
-				else cout << "Riennn" << endl;
-				break;
-			case 112:
-				pause = !pause;
-				if (pause == true){
-					cout << "Code paused, press 'p' again to resume" << endl;
-					while (pause == true){
-					
-						switch (waitKey()){
-						
-						case 112:
-						
-							pause = false;
-							cout << "Code resumed." << endl;
-							break;
-						}
+		switch (waitKey(10)){
+
+		case 27:
+			return 0;
+		case 116:
+			//PlaySound(TEXT("Music/Son.wav"), NULL, SND_ASYNC);
+			trackingMouvement = !trackingMouvement;
+			if (trackingMouvement == false) cout << "Tracking" << endl;
+			else cout << "Riennn" << endl;
+			break;
+		case 112:
+			pause = !pause;
+			if (pause == true){
+				cout << "Pause !!!!!" << endl;
+				while (pause == true){
+					switch (waitKey()){
+					case 112:
+
+						pause = false;
+						cout << "Go !!!" << endl;
+						break;
 					}
 				}
+			}
 
 
 		}
