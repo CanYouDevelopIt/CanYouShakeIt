@@ -11,7 +11,7 @@ using namespace std;
 using namespace cv;
 
 int tabPosMouv[2] = { 0, 0 };
-Rect rectangleContour = Rect(0, 0, 0, 0);
+Rect rectangleContour(0, 0, 0, 0);
 
 void rechercherMouvement(Mat thresholdImage, Mat &flux, Rect const &fleche){
 	bool mouvementDetecte = false;
@@ -43,7 +43,7 @@ void rechercherMouvement(Mat thresholdImage, Mat &flux, Rect const &fleche){
 	line(flux, Point(x, y), Point(x - 10, y), Scalar(0, 255, 0));
 	line(flux, Point(x, y), Point(x + 10, y), Scalar(0, 255, 0));
 
-	if (x >= fleche.x && x < (fleche.x + 70) && y >= fleche.y && y < (fleche.y + 70)){
+	if (x >= fleche.x && x < (fleche.x + 105) && y >= fleche.y && y < (fleche.y + 105)){
 		cout << "PERFECT" << endl;
 	}
 
@@ -90,8 +90,8 @@ int main(){
 		cvtColor(frame2, grayImage2, COLOR_BGR2GRAY);
 
 		absdiff(grayImage1, grayImage2, differenceImage);
-		threshold(differenceImage, thresholdImage, 40, 255, THRESH_BINARY);
-		threshold(thresholdImage, thresholdImage, 40, 255, THRESH_BINARY);
+		threshold(differenceImage, thresholdImage, 80, 255, THRESH_BINARY);
+		threshold(thresholdImage, thresholdImage, 80, 255, THRESH_BINARY);
 
 		Rect no = Rect(0, 0, 70, 70);
 		Rect so = Rect(0, frame1.rows - 70, 70, 70);

@@ -20,7 +20,7 @@ string Piste::getCheminMusic(){
 string Piste::getTitre(){
 	return titre;
 }
-list<Rect> Piste::getListMouvement(){
+list<cv::Rect> Piste::getListMouvement(){
 	return listMouvement;
 }
 int Piste::getScore(){

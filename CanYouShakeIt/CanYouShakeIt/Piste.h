@@ -7,13 +7,11 @@
 #include<opencv2/imgproc/imgproc.hpp>
 
 using namespace std;
-using namespace cv;
-
 class Piste
 {
 	string cheminMusic;
 	string titre;
-	list<Rect> listMouvement;
+	list<cv::Rect> listMouvement;
 	int score;
 public:
 	Piste();
@@ -21,7 +19,7 @@ public:
 	void initListMouvement();
 	string getCheminMusic();
 	string getTitre();
-	list<Rect> getListMouvement();
+	list<cv::Rect> getListMouvement();
 	int getScore();
 	void setScore(int _score);
 	~Piste();
