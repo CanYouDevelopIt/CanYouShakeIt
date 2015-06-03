@@ -7,7 +7,6 @@
 #include<Windows.h>
 #include<MMSystem.h>
 
-using namespace std;
 using namespace cv;
 
 int tabPosMouv[2] = { 0, 0 };
@@ -44,7 +43,7 @@ void rechercherMouvement(Mat thresholdImage, Mat &flux, Rect const &fleche){
 	line(flux, Point(x, y), Point(x + 10, y), Scalar(0, 255, 0));
 
 	if (x >= fleche.x && x < (fleche.x + 105) && y >= fleche.y && y < (fleche.y + 105)){
-		cout << "PERFECT" << endl;
+		std::cout << "PERFECT" << std::endl;
 	}
 
 }
@@ -60,7 +59,7 @@ int main(){
 	capture.open(0);
 
 	if (!capture.isOpened()){
-		cerr << "Une erreur est survenue lors de l'activation de la webcam." << endl;
+		std::cerr << "Une erreur est survenue lors de l'activation de la webcam." << std::endl;
 		return -1;
 	}
 
@@ -71,7 +70,7 @@ int main(){
 
 	if (!imageno.data && !imagene.data && !imagese.data && !imageso.data)                              // Check for invalid input
 	{
-		cout << "Pas d'image" << std::endl;
+		std::cout << "Pas d'image" << std::endl;
 		return -1;
 	}
 
@@ -79,9 +78,10 @@ int main(){
 	cv::resize(imagene, imagene, Size(70, 70));
 	cv::resize(imagese, imagese, Size(70, 70));
 	cv::resize(imageso, imageso, Size(70, 70));
+
 	Mat frame1, frame2;
 
-	for (;;){
+	while (1){
 
 		capture.read(frame1);
 		cvtColor(frame1, grayImage1, COLOR_BGR2GRAY);
@@ -90,8 +90,9 @@ int main(){
 		cvtColor(frame2, grayImage2, COLOR_BGR2GRAY);
 
 		absdiff(grayImage1, grayImage2, differenceImage);
-		threshold(differenceImage, thresholdImage, 80, 255, THRESH_BINARY);
-		threshold(thresholdImage, thresholdImage, 80, 255, THRESH_BINARY);
+		threshold(differenceImage, thresholdImage, 20, 255, THRESH_BINARY);
+		blur(thresholdImage, thresholdImage, Size(30, 30));
+		threshold(thresholdImage, thresholdImage, 20, 255, THRESH_BINARY);
 
 		Rect no = Rect(0, 0, 70, 70);
 		Rect so = Rect(0, frame1.rows - 70, 70, 70);
@@ -138,19 +139,19 @@ int main(){
 		case 116:
 			//PlaySound(TEXT("Music/Son.wav"), NULL, SND_ASYNC);
 			trackingMouvement = !trackingMouvement;
-			if (trackingMouvement == false) cout << "Tracking" << endl;
-			else cout << "Riennn" << endl;
+			if (trackingMouvement == false) std::cout << "Tracking" << std::endl;
+			else std::cout << "Riennn" << std::endl;
 			break;
 		case 112:
 			pause = !pause;
 			if (pause == true){
-				cout << "Pause !!!!!" << endl;
+				std::cout << "Pause !!!!!" << std::endl;
 				while (pause == true){
 					switch (waitKey()){
 					case 112:
 
 						pause = false;
-						cout << "Go !!!" << endl;
+						std::cout << "Go !!!" << std::endl;
 						break;
 					}
 				}
