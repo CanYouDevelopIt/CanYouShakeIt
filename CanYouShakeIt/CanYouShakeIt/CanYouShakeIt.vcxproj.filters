@@ -21,6 +21,12 @@
     <ClCompile Include="Piste.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="Mouvement.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="POUBELLE.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
     <ClCompile Include="ShakeManager.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -46,6 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Piste.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouvement.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

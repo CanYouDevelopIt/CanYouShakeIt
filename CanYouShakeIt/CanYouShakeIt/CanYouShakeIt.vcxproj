@@ -146,9 +146,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Mouvement.cpp" />
+    <ClCompile Include="ShakeManager.cpp" />
     <ClCompile Include="Piste.cpp" />
     <ClCompile Include="PlayMusic.cpp" />
-    <ClCompile Include="ShakeManager.cpp" />
+    <ClCompile Include="POUBELLE.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Images\ne.png" />
@@ -160,6 +162,7 @@
     <Media Include="Music\Son.wav" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Mouvement.h" />
     <ClInclude Include="Piste.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
