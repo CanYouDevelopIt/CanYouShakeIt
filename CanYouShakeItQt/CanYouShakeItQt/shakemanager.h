@@ -26,19 +26,17 @@ class ShakeManager
     const int MIN_OBJECT_AREA = 40 * 40;
     const int MAX_OBJECT_AREA = FRAME_HEIGHT*FRAME_WIDTH / 1.5;
     //names that will appear at the top of each window
-    const string nomFenetre = "Can You Shake It ? ";
-    const string windowName2 = "Thresholded Image";
-    const string windowName3 = "After Morphological Operations";
-    const string trackbarWindowName = "Trackbars";
+    string nomFenetre = "Can You Shake It ? ";
+    Mouvement mouvementCharger;
 public :
     ShakeManager();
-    void on_trackbar(int, void*);
     void createTrackbars();
     void drawObject(vector<Mouvement> &mouvements, Mat &frame);
     void morphOps(Mat &thresh);
     void rechercherMouvement(Mat threshold, Mat HSV, Mat &cameraFeed);
     void rechercherMouvement(Mouvement &m, Mat threshold, Mat HSV, Mat &cameraFeed, Rect const &fleche);
     void startGame();
-};
+    void setParameters();
+    };
 
 #endif // SHAKEMANAGER_H

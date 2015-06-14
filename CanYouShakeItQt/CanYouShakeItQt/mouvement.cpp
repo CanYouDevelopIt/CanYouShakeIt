@@ -2,7 +2,8 @@
 
 
 Mouvement::Mouvement(){
-
+    setHSVmin(Scalar(0, 0, 0));
+    setHSVmax(Scalar(28, 256, 149));
 }
 
 Mouvement::Mouvement(string nom){
@@ -27,8 +28,8 @@ Mouvement::Mouvement(string nom){
 
 }
 
-Mouvement::Mouvement(Scalar min, Scalar max){
-    HSVmin = min;
+Mouvement::Mouvement( Scalar max){
+    HSVmin = Scalar(0,0,0);
     HSVmax = max;
 }
 

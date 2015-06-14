@@ -17,7 +17,7 @@ private:
 public:
     Mouvement();
     ~Mouvement();
-    Mouvement(Scalar min, Scalar max);
+    Mouvement(Scalar max);
     Mouvement(string nomUser);
 
     int getXPos();

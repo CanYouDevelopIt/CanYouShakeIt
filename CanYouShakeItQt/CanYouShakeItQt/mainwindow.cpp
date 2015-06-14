@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include "shakemanager.h"
 
+ShakeManager shakeIt;
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -16,6 +18,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_start_clicked()
 {
-    ShakeManager shakeIt;
     shakeIt.startGame();
+}
+
+void MainWindow::on_setParameters_clicked()
+{
+    shakeIt.setParameters();
 }

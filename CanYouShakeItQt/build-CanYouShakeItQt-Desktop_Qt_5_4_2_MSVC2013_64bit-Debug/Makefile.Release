@@ -738,15 +738,7 @@ release\shakemanager.obj: ..\CanYouShakeItQt\shakemanager.cpp ..\CanYouShakeItQt
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qvector.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qpoint.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qset.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qcontiguouscache.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\QDir \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qdir.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qfileinfo.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qfile.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qfiledevice.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\QCoreApplication \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qcoreapplication.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qeventloop.h
+		C:\Qt\5.4\msvc2013_64\include\QtCore\qcontiguouscache.h
 
 release\mouvement.obj: ..\CanYouShakeItQt\mouvement.cpp ..\CanYouShakeItQt\mouvement.h \
 		C:\OpenCV2411\opencv\build\include\opencv\cv.h \

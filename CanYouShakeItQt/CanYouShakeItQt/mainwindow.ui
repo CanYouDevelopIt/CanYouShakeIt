@@ -17,14 +17,27 @@
    <widget class="QPushButton" name="start">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>140</y>
+      <x>640</x>
+      <y>80</y>
       <width>150</width>
       <height>46</height>
      </rect>
     </property>
     <property name="text">
      <string>Start</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="setParameters">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>80</y>
+      <width>150</width>
+      <height>46</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Paramètres</string>
     </property>
    </widget>
   </widget>
