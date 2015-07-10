@@ -28,7 +28,7 @@ void ShakeManager::createTrackbars(){
     createTrackbar("V_MAX", "Parametrage", &V_MAX, V_MAX, 0);
 }
 
-void ShakeManager::afficherMouvement(vector<Mouvement> &mouvements, Mat &frame){
+void ShakeManager::afficherMouvement(vector<Joueur> &mouvements, Mat &frame){
     for (int i = 0; i < mouvements.size(); i++){
         cv::circle(frame, cv::Point(mouvements.at(i).getXPos(), mouvements.at(i).getYPos()), 10, cv::Scalar(0, 0, 255));
     }
@@ -46,9 +46,9 @@ void ShakeManager::morphOps(Mat &thresh){
     dilate(thresh, thresh, dilateElement);
 }
 
-bool ShakeManager::rechercherMouvement(Mouvement &m, Mat threshold, Mat HSV, Mat &cameraFeed, Rect const &fleche){
+bool ShakeManager::rechercherMouvement(Joueur &joueur, Mat threshold, Mat HSV, Mat &cameraFeed, Rect const &fleche){
 
-    vector <Mouvement> mouvements;
+    vector <Joueur> mouvements;
 
     Mat temp;
     threshold.copyTo(temp);
@@ -69,16 +69,16 @@ bool ShakeManager::rechercherMouvement(Mouvement &m, Mat threshold, Mat HSV, Mat
 
                 if (area>MIN_OBJECT_AREA){
 
-                    Mouvement m;
+                    Joueur mouvement;
 
-                    m.setXPos(moment.m10 / area);
-                    m.setYPos(moment.m01 / area);
+                    mouvement.setXPos(moment.m10 / area);
+                    mouvement.setYPos(moment.m01 / area);
 
-                    mouvements.push_back(m);
+                    mouvements.push_back(mouvement);
 
-                    if (m.getXPos() >= fleche.x && m.getXPos() < (fleche.x + 105) && m.getYPos() >= fleche.y && m.getYPos() < (fleche.y + 105)){
+                    if (mouvement.getXPos() >= fleche.x && mouvement.getXPos() < (fleche.x + 105) && mouvement.getYPos() >= fleche.y && mouvement.getYPos() < (fleche.y + 105)){
                         std::cout << "PERFECT" << std::endl;
-                        // le rectangle a été trouvé
+                        joueur.setScore(10);
                         return true;
                     }
 
@@ -164,9 +164,9 @@ void ShakeManager::startGame(QMediaPlayer* music){
         randomRect = rectPositions[idRect];
 
         cvtColor(cameraFeed, HSV, COLOR_BGR2HSV);
-        inRange(HSV, mouvementCharger.getHSVmin(), mouvementCharger.getHSVmax(), threshold);
+        inRange(HSV, joueur.getHSVmin(), joueur.getHSVmax(), threshold);
         morphOps(threshold);
-        mouvementTrouver = rechercherMouvement(mouvementCharger, threshold, HSV, cameraFeed, randomRect);
+        mouvementTrouver = rechercherMouvement(joueur, threshold, HSV, cameraFeed, randomRect);
 
         switch(idRect){
             case 0:
@@ -220,7 +220,7 @@ void ShakeManager::startGame(QMediaPlayer* music){
             musicEnCours = false;
     }
 
-    std::cout << "finish" << std::endl;
+    std::cout << "Score : " << joueur.getScore() << std::endl;
 
 }
 
@@ -256,7 +256,7 @@ void ShakeManager::setParameters(){
             int h_max = getTrackbarPos("H_MAX", "Parametrage");
             int s_max = getTrackbarPos("S_MAX", "Parametrage");
             int v_max = getTrackbarPos("V_MAX", "Parametrage");
-            mouvementCharger = Mouvement(Scalar(h_max,s_max,v_max));
+            joueur = Joueur(Scalar(h_max,s_max,v_max));
             return;
         }
     }

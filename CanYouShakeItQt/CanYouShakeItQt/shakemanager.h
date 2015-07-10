@@ -5,7 +5,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
-#include "Mouvement.h"
+#include "Joueur.h"
 #include <QMediaPlayer>
 
 class ShakeManager
@@ -22,13 +22,13 @@ class ShakeManager
     const int MIN_OBJECT_AREA = 40 * 40;
     const int MAX_OBJECT_AREA = FRAME_HEIGHT*FRAME_WIDTH / 1.5;
     string nomFenetre = "Can You Shake It ? ";
-    Mouvement mouvementCharger;
+    Joueur joueur;
 public :
     ShakeManager();
     void createTrackbars();
-    void afficherMouvement(vector<Mouvement> &mouvements, Mat &frame);
+    void afficherMouvement(vector<Joueur> &mouvements, Mat &frame);
     void morphOps(Mat &thresh);
-    bool rechercherMouvement(Mouvement &m, Mat threshold, Mat HSV, Mat &cameraFeed, Rect const &fleche);
+    bool rechercherMouvement(Joueur &joueur, Mat threshold, Mat HSV, Mat &cameraFeed, Rect const &fleche);
     void startGame(QMediaPlayer* music);
     void setParameters();
     };
