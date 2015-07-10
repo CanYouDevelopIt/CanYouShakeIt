@@ -18,17 +18,9 @@ Mouvement::Mouvement(string nom){
         setHSVmax(Scalar(15, 116, 242));
     }
 
-    //switch (nomJoueur){
-    //	case "Jeremy":
-    //		setHSVmin(Scalar(0, 0, 0));
-    //		setHSVmax(Scalar(16, 171, 153));
-    //		break;
-
-    //}
-
 }
 
-Mouvement::Mouvement( Scalar max){
+Mouvement::Mouvement(Scalar max){
     HSVmin = Scalar(0,0,0);
     HSVmax = max;
 }

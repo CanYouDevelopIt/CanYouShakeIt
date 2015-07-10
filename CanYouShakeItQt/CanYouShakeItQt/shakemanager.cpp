@@ -28,7 +28,7 @@ void ShakeManager::createTrackbars(){
     createTrackbar("V_MAX", "Parametrage", &V_MAX, V_MAX, 0);
 }
 
-void ShakeManager::drawObject(vector<Mouvement> &mouvements, Mat &frame){
+void ShakeManager::afficherMouvement(vector<Mouvement> &mouvements, Mat &frame){
     for (int i = 0; i < mouvements.size(); i++){
         cv::circle(frame, cv::Point(mouvements.at(i).getXPos(), mouvements.at(i).getYPos()), 10, cv::Scalar(0, 0, 255));
     }
@@ -36,70 +36,14 @@ void ShakeManager::drawObject(vector<Mouvement> &mouvements, Mat &frame){
 
 void ShakeManager::morphOps(Mat &thresh){
 
-    //create structuring element that will be used to "dilate" and "erode" image.
-    //the element chosen here is a 3px by 3px rectangle
-
     Mat erodeElement = getStructuringElement(MORPH_RECT, Size(3, 3));
-    //dilate with larger element so make sure object is nicely visible
     Mat dilateElement = getStructuringElement(MORPH_RECT, Size(8, 8));
 
     erode(thresh, thresh, erodeElement);
     erode(thresh, thresh, erodeElement);
 
-
     dilate(thresh, thresh, dilateElement);
     dilate(thresh, thresh, dilateElement);
-}
-void ShakeManager::rechercherMouvement(Mat threshold, Mat HSV, Mat &cameraFeed){
-
-    vector <Mouvement> mouvements;
-
-    Mat temp;
-    threshold.copyTo(temp);
-    //these two vectors needed for output of findContours
-    vector< vector<Point> > contours;
-    vector<Vec4i> hierarchy;
-    //find contours of filtered image using openCV findContours function
-    findContours(temp, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE);
-    //use moments method to find our filtered object
-    double refArea = 0;
-    bool objectFound = false;
-    if (hierarchy.size() > 0) {
-        int numObjects = hierarchy.size();
-        //if number of objects greater than MAX_NUM_OBJECTS we have a noisy filter
-        if (numObjects<MAX_NUM_OBJECTS){
-            for (int index = 0; index >= 0; index = hierarchy[index][0]) {
-
-                Moments moment = moments((cv::Mat)contours[index]);
-                double area = moment.m00;
-
-                //if the area is less than 20 px by 20px then it is probably just noise
-                //if the area is the same as the 3/2 of the image size, probably just a bad filter
-                //we only want the object with the largest area so we safe a reference area each
-                //iteration and compare it to the area in the next iteration.
-                if (area>MIN_OBJECT_AREA){
-
-                    Mouvement m;
-
-                    m.setXPos(moment.m10 / area);
-                    m.setYPos(moment.m01 / area);
-
-                    mouvements.push_back(m);
-
-                    objectFound = true;
-
-                }else objectFound = false;
-
-            }
-            //let user know you found an object
-            if (objectFound == true){
-                //draw object location on screen
-                drawObject(mouvements, cameraFeed);
-            }
-
-        }
-        else putText(cameraFeed, "TOO MUCH NOISE! ADJUST FILTER", Point(0, 50), 1, 2, Scalar(0, 0, 255), 2);
-    }
 }
 
 bool ShakeManager::rechercherMouvement(Mouvement &m, Mat threshold, Mat HSV, Mat &cameraFeed, Rect const &fleche){
@@ -108,27 +52,19 @@ bool ShakeManager::rechercherMouvement(Mouvement &m, Mat threshold, Mat HSV, Mat
 
     Mat temp;
     threshold.copyTo(temp);
-    //these two vectors needed for output of findContours
     vector< vector<Point> > contours;
     vector<Vec4i> hierarchy;
-    //find contours of filtered image using openCV findContours function
     findContours(temp, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE);
-    //use moments method to find our filtered object
     double refArea = 0;
-    bool objectFound = false;
+    bool mouvementTrouver = false;
     if (hierarchy.size() > 0) {
         int numObjects = hierarchy.size();
-        //if number of objects greater than MAX_NUM_OBJECTS we have a noisy filter
-        if (numObjects<MAX_NUM_OBJECTS){
+        if (numObjects<MAX_MOUVEMENT){
             for (int index = 0; index >= 0; index = hierarchy[index][0]) {
 
                 Moments moment = moments((cv::Mat)contours[index]);
                 double area = moment.m00;
 
-                //if the area is less than 20 px by 20px then it is probably just noise
-                //if the area is the same as the 3/2 of the image size, probably just a bad filter
-                //we only want the object with the largest area so we safe a reference area each
-                //iteration and compare it to the area in the next iteration.
                 if (area>MIN_OBJECT_AREA){
 
                     Mouvement m;
@@ -144,20 +80,20 @@ bool ShakeManager::rechercherMouvement(Mouvement &m, Mat threshold, Mat HSV, Mat
                         return true;
                     }
 
-                    objectFound = true;
+                    mouvementTrouver = true;
 
                 }
-                else objectFound = false;
+                else mouvementTrouver = false;
 
             }
             //let user know you found an object
-            if (objectFound == true){
+            if (mouvementTrouver == true){
                 //draw object location on screen
-                drawObject(mouvements, cameraFeed);
+                afficherMouvement(mouvements, cameraFeed);
             }
 
         }
-        else putText(cameraFeed, "TOO MUCH NOISE! ADJUST FILTER", Point(0, 50), 1, 2, Scalar(0, 0, 255), 2);
+        else putText(cameraFeed, "Problème de detection de mouvement", Point(0, 50), 1, 2, Scalar(0, 0, 255), 2);
     }
     // le rectangle n'a pas été trouvé
     return false;
@@ -167,7 +103,6 @@ void ShakeManager::startGame(){
 
     bool pause = false;
 
-    //Matrix to store each frame of the webcam feed
     Mat cameraFeed;
     Mat threshold;
     Mat HSV;
@@ -197,18 +132,14 @@ void ShakeManager::startGame(){
     resize(imagese, imagese, Size(70, 70));
     resize(imageso, imageso, Size(70, 70));
 
-    //set height and width of capture frame
     capture.set(CV_CAP_PROP_FRAME_WIDTH, FRAME_WIDTH);
     capture.set(CV_CAP_PROP_FRAME_HEIGHT, FRAME_HEIGHT);
-    //start an infinite loop where webcam feed is copied to cameraFeed matrix
 
     boolean mouvementTrouver = false;
     // le 1er rectangle que l'utilisateur doit atteindre
     Rect randomRect = Rect(0, 0, 70, 70);
     while (1){
-        //store image to matrix
         capture.read(cameraFeed);
-        //convert frame from BGR to HSV colorspace
         cvtColor(cameraFeed, HSV, COLOR_BGR2HSV);
 
         int camRows = cameraFeed.rows;
@@ -220,11 +151,10 @@ void ShakeManager::startGame(){
         Rect se = Rect(camCols - 70, camRows - 70, 70, 70);
 
         if(mouvementTrouver){
-        // génére un autre rectangle à trouver
-        randomRect = generateAMouvement(camRows,camCols);
+            // génére un autre rectangle à trouver
+            randomRect = generateAMouvement(camRows,camCols);
         }
-        //mouvementCharger = Mouvement("Pascal");
-        //mouvementCharger(Scalar(15, 116, 242));
+
         cvtColor(cameraFeed, HSV, COLOR_BGR2HSV);
         inRange(HSV, mouvementCharger.getHSVmin(), mouvementCharger.getHSVmax(), threshold);
         morphOps(threshold);
@@ -251,6 +181,7 @@ void ShakeManager::startGame(){
         srcBGRne.copyTo(en);
         srcBGRse.copyTo(es);
 
+        flip(cameraFeed,cameraFeed,1);
         imshow(nomFenetre, cameraFeed);
 
         switch (waitKey(10)){
@@ -286,7 +217,7 @@ Rect ShakeManager::generateAMouvement(int camRows,int camCols){
     Rect so = Rect(0, camRows - 70, 70, 70);
     Rect ne = Rect(camCols - 70, 0, 70, 70);
     Rect se = Rect(camCols - 70, camRows - 70, 70, 70);
-    Rect rectPositions[] ={no,so,ne,se};
+    Rect rectPositions[] ={ne,se,no,so};
     int randomNumber = std::rand()%4;
     std::cout << " Random Number = " << randomNumber << std::endl;
     return rectPositions[randomNumber];
@@ -294,7 +225,6 @@ Rect ShakeManager::generateAMouvement(int camRows,int camCols){
 
 void ShakeManager::setParameters(){
 
-    //Matrix to store each frame of the webcam feed
     Mat cameraFeed;
     Mat threshold;
     Mat HSV;
@@ -309,23 +239,18 @@ void ShakeManager::setParameters(){
         return;
     }
 
-    //set height and width of capture frame
-    capture.set(CV_CAP_PROP_FRAME_WIDTH, FRAME_WIDTH);
-    capture.set(CV_CAP_PROP_FRAME_HEIGHT, FRAME_HEIGHT);
-    //start an infinite loop where webcam feed is copied to cameraFeed matrix
+    capture.set(CV_CAP_PROP_FRAME_WIDTH, 1200);
+    capture.set(CV_CAP_PROP_FRAME_HEIGHT, 700);
 
     while (1){
-        //store image to matrix
         capture.read(cameraFeed);
-        //convert frame from BGR to HSV colorspace
         cvtColor(cameraFeed, HSV, COLOR_BGR2HSV);
 
-        //if in calibration mode, we track objects based on the HSV slider values.
         cvtColor(cameraFeed, HSV, COLOR_BGR2HSV);
         inRange(HSV, Scalar(H_MIN, S_MIN, V_MIN), Scalar(H_MAX, S_MAX, V_MAX), threshold);
         morphOps(threshold);
         imshow("Parametrage", threshold);
-        rechercherMouvement(threshold, HSV, cameraFeed);
+
         if(waitKey(10) == 27){
             int h_max = getTrackbarPos("H_MAX", "Parametrage");
             int s_max = getTrackbarPos("S_MAX", "Parametrage");
