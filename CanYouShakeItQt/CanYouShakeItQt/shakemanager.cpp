@@ -102,7 +102,7 @@ void ShakeManager::rechercherMouvement(Mat threshold, Mat HSV, Mat &cameraFeed){
     }
 }
 
-void ShakeManager::rechercherMouvement(Mouvement &m, Mat threshold, Mat HSV, Mat &cameraFeed, Rect const &fleche){
+bool ShakeManager::rechercherMouvement(Mouvement &m, Mat threshold, Mat HSV, Mat &cameraFeed, Rect const &fleche){
 
     vector <Mouvement> mouvements;
 
@@ -140,6 +140,8 @@ void ShakeManager::rechercherMouvement(Mouvement &m, Mat threshold, Mat HSV, Mat
 
                     if (m.getXPos() >= fleche.x && m.getXPos() < (fleche.x + 105) && m.getYPos() >= fleche.y && m.getYPos() < (fleche.y + 105)){
                         std::cout << "PERFECT" << std::endl;
+                        // le rectangle a été trouvé
+                        return true;
                     }
 
                     objectFound = true;
@@ -157,9 +159,9 @@ void ShakeManager::rechercherMouvement(Mouvement &m, Mat threshold, Mat HSV, Mat
         }
         else putText(cameraFeed, "TOO MUCH NOISE! ADJUST FILTER", Point(0, 50), 1, 2, Scalar(0, 0, 255), 2);
     }
+    // le rectangle n'a pas été trouvé
+    return false;
 }
-
-
 
 void ShakeManager::startGame(){
 
@@ -200,23 +202,33 @@ void ShakeManager::startGame(){
     capture.set(CV_CAP_PROP_FRAME_HEIGHT, FRAME_HEIGHT);
     //start an infinite loop where webcam feed is copied to cameraFeed matrix
 
+    boolean mouvementTrouver = false;
+    // le 1er rectangle que l'utilisateur doit atteindre
+    Rect randomRect = Rect(0, 0, 70, 70);
     while (1){
         //store image to matrix
         capture.read(cameraFeed);
         //convert frame from BGR to HSV colorspace
         cvtColor(cameraFeed, HSV, COLOR_BGR2HSV);
 
-        Rect no = Rect(0, 0, 70, 70);
-        Rect so = Rect(0, cameraFeed.rows - 70, 70, 70);
-        Rect ne = Rect(cameraFeed.cols - 70, 0, 70, 70);
-        Rect se = Rect(cameraFeed.cols - 70, cameraFeed.rows - 70, 70, 70);
+        int camRows = cameraFeed.rows;
+        int camCols = cameraFeed.cols;
 
+        Rect no = Rect(0, 0, 70, 70);
+        Rect so = Rect(0, camRows - 70, 70, 70);
+        Rect ne = Rect(camCols - 70, 0, 70, 70);
+        Rect se = Rect(camCols - 70, camRows - 70, 70, 70);
+
+        if(mouvementTrouver){
+        // génére un autre rectangle à trouver
+        randomRect = generateAMouvement(camRows,camCols);
+        }
         //mouvementCharger = Mouvement("Pascal");
         //mouvementCharger(Scalar(15, 116, 242));
         cvtColor(cameraFeed, HSV, COLOR_BGR2HSV);
         inRange(HSV, mouvementCharger.getHSVmin(), mouvementCharger.getHSVmax(), threshold);
         morphOps(threshold);
-        rechercherMouvement(mouvementCharger, threshold, HSV, cameraFeed, se);
+        mouvementTrouver = rechercherMouvement(mouvementCharger, threshold, HSV, cameraFeed, randomRect);
 
 
         Mat srcBGRno = Mat(imageno.size(), CV_8UC3);
@@ -238,6 +250,7 @@ void ShakeManager::startGame(){
         srcBGRso.copyTo(os);
         srcBGRne.copyTo(en);
         srcBGRse.copyTo(es);
+
         imshow(nomFenetre, cameraFeed);
 
         switch (waitKey(10)){
@@ -263,6 +276,20 @@ void ShakeManager::startGame(){
     }
 
 
+}
+
+
+
+Rect ShakeManager::generateAMouvement(int camRows,int camCols){
+
+    Rect no = Rect(0, 0, 70, 70);
+    Rect so = Rect(0, camRows - 70, 70, 70);
+    Rect ne = Rect(camCols - 70, 0, 70, 70);
+    Rect se = Rect(camCols - 70, camRows - 70, 70, 70);
+    Rect rectPositions[] ={no,so,ne,se};
+    int randomNumber = std::rand()%4;
+    std::cout << " Random Number = " << randomNumber << std::endl;
+    return rectPositions[randomNumber];
 }
 
 void ShakeManager::setParameters(){

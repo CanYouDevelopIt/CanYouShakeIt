@@ -34,7 +34,8 @@ public :
     void drawObject(vector<Mouvement> &mouvements, Mat &frame);
     void morphOps(Mat &thresh);
     void rechercherMouvement(Mat threshold, Mat HSV, Mat &cameraFeed);
-    void rechercherMouvement(Mouvement &m, Mat threshold, Mat HSV, Mat &cameraFeed, Rect const &fleche);
+    bool rechercherMouvement(Mouvement &m, Mat threshold, Mat HSV, Mat &cameraFeed, Rect const &fleche);
+    Rect generateAMouvement(int,int);
     void startGame();
     void setParameters();
     };
