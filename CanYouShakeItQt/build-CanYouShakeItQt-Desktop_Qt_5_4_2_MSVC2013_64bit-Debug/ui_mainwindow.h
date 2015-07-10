@@ -29,6 +29,7 @@ public:
     QWidget *centralWidget;
     QPushButton *start;
     QPushButton *setParameters;
+    QPushButton *playMusic;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -46,10 +47,13 @@ public:
         setParameters = new QPushButton(centralWidget);
         setParameters->setObjectName(QStringLiteral("setParameters"));
         setParameters->setGeometry(QRect(60, 80, 150, 46));
+        playMusic = new QPushButton(centralWidget);
+        playMusic->setObjectName(QStringLiteral("playMusic"));
+        playMusic->setGeometry(QRect(220, 270, 131, 51));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 937, 38));
+        menuBar->setGeometry(QRect(0, 0, 937, 21));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -68,6 +72,7 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
         start->setText(QApplication::translate("MainWindow", "Start", 0));
         setParameters->setText(QApplication::translate("MainWindow", "Param\303\250tres", 0));
+        playMusic->setText(QApplication::translate("MainWindow", "PushButton", 0));
     } // retranslateUi
 
 };

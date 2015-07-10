@@ -55,10 +55,12 @@ bool ShakeManager::rechercherMouvement(Mouvement &m, Mat threshold, Mat HSV, Mat
     vector< vector<Point> > contours;
     vector<Vec4i> hierarchy;
     findContours(temp, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE);
-    double refArea = 0;
+
     bool mouvementTrouver = false;
     if (hierarchy.size() > 0) {
+
         int numObjects = hierarchy.size();
+
         if (numObjects<MAX_MOUVEMENT){
             for (int index = 0; index >= 0; index = hierarchy[index][0]) {
 
@@ -86,11 +88,8 @@ bool ShakeManager::rechercherMouvement(Mouvement &m, Mat threshold, Mat HSV, Mat
                 else mouvementTrouver = false;
 
             }
-            //let user know you found an object
-            if (mouvementTrouver == true){
-                //draw object location on screen
-                afficherMouvement(mouvements, cameraFeed);
-            }
+
+            //afficherMouvement(mouvements, cameraFeed);
 
         }
         else putText(cameraFeed, "Problème de detection de mouvement", Point(0, 50), 1, 2, Scalar(0, 0, 255), 2);
@@ -99,8 +98,11 @@ bool ShakeManager::rechercherMouvement(Mouvement &m, Mat threshold, Mat HSV, Mat
     return false;
 }
 
-void ShakeManager::startGame(){
+void ShakeManager::startGame(QMediaPlayer* music){
 
+    music->play();
+
+    bool musicEnCours = true;
     bool pause = false;
 
     Mat cameraFeed;
@@ -136,9 +138,14 @@ void ShakeManager::startGame(){
     capture.set(CV_CAP_PROP_FRAME_HEIGHT, FRAME_HEIGHT);
 
     boolean mouvementTrouver = false;
-    // le 1er rectangle que l'utilisateur doit atteindre
-    Rect randomRect = Rect(0, 0, 70, 70);
-    while (1){
+
+    int idRect = std::rand()%4;
+    Rect randomRect;
+    Mat srcBGR;
+
+    std::cout << "start" << std::endl;
+
+    while (musicEnCours){
         capture.read(cameraFeed);
         cvtColor(cameraFeed, HSV, COLOR_BGR2HSV);
 
@@ -149,37 +156,42 @@ void ShakeManager::startGame(){
         Rect so = Rect(0, camRows - 70, 70, 70);
         Rect ne = Rect(camCols - 70, 0, 70, 70);
         Rect se = Rect(camCols - 70, camRows - 70, 70, 70);
+        Rect rectPositions[] ={no,ne,so,se};
 
         if(mouvementTrouver){
-            // génére un autre rectangle à trouver
-            randomRect = generateAMouvement(camRows,camCols);
+            idRect = std::rand()%4;
         }
+        randomRect = rectPositions[idRect];
 
         cvtColor(cameraFeed, HSV, COLOR_BGR2HSV);
         inRange(HSV, mouvementCharger.getHSVmin(), mouvementCharger.getHSVmax(), threshold);
         morphOps(threshold);
         mouvementTrouver = rechercherMouvement(mouvementCharger, threshold, HSV, cameraFeed, randomRect);
 
+        switch(idRect){
+            case 0:
+                srcBGR = Mat(imageno.size(), CV_8UC3);
+                cvtColor(imageno, srcBGR, CV_GRAY2BGR);
+                break;
 
-        Mat srcBGRno = Mat(imageno.size(), CV_8UC3);
-        Mat srcBGRne = Mat(imagene.size(), CV_8UC3);
-        Mat srcBGRso = Mat(imageso.size(), CV_8UC3);
-        Mat srcBGRse = Mat(imagese.size(), CV_8UC3);
+            case 1:
+                srcBGR = Mat(imagene.size(), CV_8UC3);
+                cvtColor(imagene, srcBGR, CV_GRAY2BGR);
+                break;
 
-        cvtColor(imageno, srcBGRno, CV_GRAY2BGR);
-        cvtColor(imagene, srcBGRne, CV_GRAY2BGR);
-        cvtColor(imageso, srcBGRso, CV_GRAY2BGR);
-        cvtColor(imagese, srcBGRse, CV_GRAY2BGR);
+            case 2:
+                 srcBGR = Mat(imageso.size(), CV_8UC3);
+                 cvtColor(imageso, srcBGR, CV_GRAY2BGR);
+                 break;
 
-        Mat on = cameraFeed(no);
-        Mat os = cameraFeed(so);
-        Mat en = cameraFeed(ne);
-        Mat es = cameraFeed(se);
+            default:
+                 srcBGR = Mat(imagese.size(), CV_8UC3);
+                 cvtColor(imagese, srcBGR, CV_GRAY2BGR);
+                 break;
+        }
 
-        srcBGRno.copyTo(on);
-        srcBGRso.copyTo(os);
-        srcBGRne.copyTo(en);
-        srcBGRse.copyTo(es);
+        Mat ImageFeed = cameraFeed(randomRect);
+        srcBGR.copyTo(ImageFeed);
 
         flip(cameraFeed,cameraFeed,1);
         imshow(nomFenetre, cameraFeed);
@@ -204,23 +216,12 @@ void ShakeManager::startGame(){
             }
         }
 
+        if(music->state() == QMediaPlayer::StoppedState)
+            musicEnCours = false;
     }
 
+    std::cout << "finish" << std::endl;
 
-}
-
-
-
-Rect ShakeManager::generateAMouvement(int camRows,int camCols){
-
-    Rect no = Rect(0, 0, 70, 70);
-    Rect so = Rect(0, camRows - 70, 70, 70);
-    Rect ne = Rect(camCols - 70, 0, 70, 70);
-    Rect se = Rect(camCols - 70, camRows - 70, 70, 70);
-    Rect rectPositions[] ={ne,se,no,so};
-    int randomNumber = std::rand()%4;
-    std::cout << " Random Number = " << randomNumber << std::endl;
-    return rectPositions[randomNumber];
 }
 
 void ShakeManager::setParameters(){

@@ -17,7 +17,6 @@ public:
 
 private slots:
     void on_start_clicked();
-
     void on_setParameters_clicked();
 
 private:

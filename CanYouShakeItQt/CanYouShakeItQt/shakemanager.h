@@ -6,6 +6,7 @@
 #include <iostream>
 #include <vector>
 #include "Mouvement.h"
+#include <QMediaPlayer>
 
 class ShakeManager
 {
@@ -28,8 +29,7 @@ public :
     void afficherMouvement(vector<Mouvement> &mouvements, Mat &frame);
     void morphOps(Mat &thresh);
     bool rechercherMouvement(Mouvement &m, Mat threshold, Mat HSV, Mat &cameraFeed, Rect const &fleche);
-    Rect generateAMouvement(int,int);
-    void startGame();
+    void startGame(QMediaPlayer* music);
     void setParameters();
     };
 
