@@ -23,6 +23,7 @@ class ShakeManager
     const int MAX_OBJECT_AREA = FRAME_HEIGHT*FRAME_WIDTH / 1.5;
     string nomFenetre = "Can You Shake It ? ";
     Joueur joueur;
+    QMediaPlayer* son = new QMediaPlayer;
 public :
     ShakeManager();
     void createTrackbars();

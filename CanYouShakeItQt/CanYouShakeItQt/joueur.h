@@ -13,7 +13,7 @@ private:
     int xPos, yPos;
     Scalar HSVmin, HSVmax;
     std::string nomJoueur;
-    int score = 0;
+    int score;
 public:
     Joueur();
     ~Joueur();

@@ -5,6 +5,7 @@
 #include<vector>
 #include<Windows.h>
 #include<MMSystem.h>
+#include <QMediaPlayer>
 
 using namespace std;
 using namespace cv;
@@ -78,6 +79,11 @@ bool ShakeManager::rechercherMouvement(Joueur &joueur, Mat threshold, Mat HSV, M
 
                     if (mouvement.getXPos() >= fleche.x && mouvement.getXPos() < (fleche.x + 105) && mouvement.getYPos() >= fleche.y && mouvement.getYPos() < (fleche.y + 105)){
                         std::cout << "PERFECT" << std::endl;
+                        if(son->mediaStatus() == QMediaPlayer::PlayingState)
+                            son->stop();
+                        son->setMedia(QUrl::fromLocalFile("C:/Users/Rémy/Documents/GitHub/CanYouShakeIt/CanYouShakeItQt/CanYouShakeItQt/Music/power-up.wav"));
+                        son->setVolume(5);
+                        son->play();
                         joueur.setScore(10);
                         return true;
                     }
@@ -89,7 +95,7 @@ bool ShakeManager::rechercherMouvement(Joueur &joueur, Mat threshold, Mat HSV, M
 
             }
 
-            //afficherMouvement(mouvements, cameraFeed);
+            afficherMouvement(mouvements, cameraFeed);
 
         }
         else putText(cameraFeed, "Problème de detection de mouvement", Point(0, 50), 1, 2, Scalar(0, 0, 255), 2);
@@ -140,6 +146,7 @@ void ShakeManager::startGame(QMediaPlayer* music){
     boolean mouvementTrouver = false;
 
     int idRect = std::rand()%4;
+    std::cout << idRect << std::endl;
     Rect randomRect;
     Mat srcBGR;
     std::cout << "start" << std::endl;
@@ -191,8 +198,10 @@ void ShakeManager::startGame(QMediaPlayer* music){
 
         Mat ImageFeed = cameraFeed(randomRect);
         srcBGR.copyTo(ImageFeed);
-        putText(cameraFeed, "Score : "+ joueur.getScore(), Point(0, 50), 1, 2, Scalar(0, 0, 255), 2);
+
         flip(cameraFeed,cameraFeed,1);
+        string score = "Score : " + std::to_string(joueur.getScore());
+        putText(cameraFeed, score, Point(270, 30), 1, 2, Scalar(0, 0, 255), 2);
         imshow(nomFenetre, cameraFeed);
 
         switch (waitKey(10)){

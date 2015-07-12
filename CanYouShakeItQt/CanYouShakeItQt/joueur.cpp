@@ -4,6 +4,7 @@
 Joueur::Joueur(){
     setHSVmin(Scalar(0, 0, 0));
     setHSVmax(Scalar(28, 256, 149));
+    score = 0;
 }
 
 Joueur::Joueur(string nom){
@@ -18,11 +19,14 @@ Joueur::Joueur(string nom){
         setHSVmax(Scalar(15, 116, 242));
     }
 
+    score = 0;
+
 }
 
 Joueur::Joueur(Scalar max){
     HSVmin = Scalar(0,0,0);
     HSVmax = max;
+    score = 0;
 }
 
 Joueur::~Joueur(){
