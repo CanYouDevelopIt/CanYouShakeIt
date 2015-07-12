@@ -142,7 +142,6 @@ void ShakeManager::startGame(QMediaPlayer* music){
     int idRect = std::rand()%4;
     Rect randomRect;
     Mat srcBGR;
-
     std::cout << "start" << std::endl;
 
     while (musicEnCours){
@@ -192,7 +191,7 @@ void ShakeManager::startGame(QMediaPlayer* music){
 
         Mat ImageFeed = cameraFeed(randomRect);
         srcBGR.copyTo(ImageFeed);
-
+        putText(cameraFeed, "Score : "+ joueur.getScore(), Point(0, 50), 1, 2, Scalar(0, 0, 255), 2);
         flip(cameraFeed,cameraFeed,1);
         imshow(nomFenetre, cameraFeed);
 
