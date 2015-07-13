@@ -98,7 +98,6 @@ bool ShakeManager::rechercherMouvement(Joueur &joueur, Mat threshold, Mat HSV, M
             afficherMouvement(mouvements, cameraFeed);
 
         }
-        else putText(cameraFeed, "Problème de detection de mouvement", Point(0, 50), 1, 2, Scalar(0, 0, 255), 2);
     }
     // le rectangle n'a pas été trouvé
     return false;
