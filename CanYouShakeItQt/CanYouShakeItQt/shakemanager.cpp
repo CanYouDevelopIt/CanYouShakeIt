@@ -15,10 +15,8 @@ ShakeManager::ShakeManager()
 }
 
 void ShakeManager::createTrackbars(){
-    //create window for trackbars
 
     namedWindow("Parametrage", 0);
-    //create memory to store trackbar name on window
     char TrackbarName[50];
     sprintf(TrackbarName, "H_MAX", H_MAX);
     sprintf(TrackbarName, "S_MAX", S_MAX);
@@ -78,7 +76,6 @@ bool ShakeManager::rechercherMouvement(Joueur &joueur, Mat threshold, Mat HSV, M
                     mouvements.push_back(mouvement);
 
                     if (mouvement.getXPos() >= fleche.x && mouvement.getXPos() < (fleche.x + 105) && mouvement.getYPos() >= fleche.y && mouvement.getYPos() < (fleche.y + 105)){
-                        std::cout << "PERFECT" << std::endl;
                         if(son->mediaStatus() == QMediaPlayer::PlayingState)
                             son->stop();
                         son->setMedia(QUrl("qrc:/sounds/power-up.wav"));
@@ -98,7 +95,6 @@ bool ShakeManager::rechercherMouvement(Joueur &joueur, Mat threshold, Mat HSV, M
             afficherMouvement(mouvements, cameraFeed);
 
         }
-        else putText(cameraFeed, "Problème de detection de mouvement", Point(0, 50), 1, 2, Scalar(0, 0, 255), 2);
     }
     // le rectangle n'a pas été trouvé
     return false;
@@ -120,7 +116,7 @@ void ShakeManager::startGame(QMediaPlayer* music){
     capture.open(0);
 
     if (!capture.isOpened()){
-        std::cerr << "Une erreur est survenue lors de l'activation de la webcam." << std::endl;
+        //Une erreur est survenue lors de l'activation de la webcam
         return;
     }
 
@@ -131,7 +127,7 @@ void ShakeManager::startGame(QMediaPlayer* music){
 
     if (!imageno.data && !imagene.data && !imagese.data && !imageso.data)                              // Check for invalid input
     {
-        std::cout << "Pas d'image" << std::endl;
+        //Pas d'image
         return;
     }
 
@@ -146,10 +142,8 @@ void ShakeManager::startGame(QMediaPlayer* music){
     boolean mouvementTrouver = false;
 
     int idRect = std::rand()%4;
-    std::cout << idRect << std::endl;
     Rect randomRect;
     Mat srcBGR;
-    std::cout << "start" << std::endl;
 
     while (musicEnCours){
         capture.read(cameraFeed);
@@ -204,33 +198,15 @@ void ShakeManager::startGame(QMediaPlayer* music){
         putText(cameraFeed, score, Point(270, 30), 1, 2, Scalar(0, 0, 255), 2);
         imshow(nomFenetre, cameraFeed);
 
-        switch (waitKey(10)){
-
-        case 27:
+        if(waitKey(10) == 27){
             music->stop();
             destroyWindow("Can You Shake It ? ");
             return;
-        case 112:
-            pause = !pause;
-            if (pause == true){
-                std::cout << "Pause !!!!!" << std::endl;
-                while (pause == true){
-                    switch (waitKey()){
-                    case 112:
-
-                        pause = false;
-                        std::cout << "Go !!!" << std::endl;
-                        break;
-                    }
-                }
-            }
         }
 
         if(music->state() == QMediaPlayer::StoppedState)
             musicEnCours = false;
     }
-
-    std::cout << "Score : " << joueur.getScore() << std::endl;
 
 }
 
@@ -246,7 +222,7 @@ void ShakeManager::setParameters(){
     capture.open(0);
 
     if (!capture.isOpened()){
-        std::cerr << "Une erreur est survenue lors de l'activation de la webcam." << std::endl;
+        //Une erreur est survenue lors de l'activation de la webcam.
         return;
     }
 
