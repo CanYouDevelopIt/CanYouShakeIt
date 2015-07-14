@@ -208,6 +208,7 @@ void ShakeManager::startGame(QMediaPlayer* music){
 
         case 27:
             music->stop();
+            destroyWindow("Can You Shake It ? ");
             return;
         case 112:
             pause = !pause;
@@ -266,6 +267,7 @@ void ShakeManager::setParameters(){
             int s_max = getTrackbarPos("S_MAX", "Parametrage");
             int v_max = getTrackbarPos("V_MAX", "Parametrage");
             joueur = Joueur(Scalar(h_max,s_max,v_max));
+            destroyWindow("Parametrage");
             return;
         }
     }
