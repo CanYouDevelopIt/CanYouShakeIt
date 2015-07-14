@@ -30,3 +30,6 @@ LIBS += -LC:\OpenCV2411\opencv\build\x64\vc12\lib\
 -lopencv_core2411d\
 -lopencv_highgui2411d\
 -lopencv_imgproc2411d\
+
+RESOURCES += \
+    Music/res.qrc
