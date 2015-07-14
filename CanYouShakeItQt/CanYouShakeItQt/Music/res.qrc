@@ -1,5 +1,0 @@
-<RCC>
-    <qresource prefix="/sounds">
-        <file>power-up.wav</file>
-    </qresource>
-</RCC>

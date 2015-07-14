@@ -81,7 +81,7 @@ bool ShakeManager::rechercherMouvement(Joueur &joueur, Mat threshold, Mat HSV, M
                         std::cout << "PERFECT" << std::endl;
                         if(son->mediaStatus() == QMediaPlayer::PlayingState)
                             son->stop();
-                        son->setMedia(QUrl("qrc:/sounds/power-up.wav"));
+                        son->setMedia(QUrl::fromLocalFile("C:/Users/Rémy/Documents/GitHub/CanYouShakeIt/CanYouShakeItQt/CanYouShakeItQt/Music/power-up.wav"));
                         son->setVolume(5);
                         son->play();
                         joueur.setScore(10);
@@ -207,7 +207,6 @@ void ShakeManager::startGame(QMediaPlayer* music){
         switch (waitKey(10)){
 
         case 27:
-            music->stop();
             return;
         case 112:
             pause = !pause;
@@ -269,12 +268,6 @@ void ShakeManager::setParameters(){
             return;
         }
     }
-
-    if (waitKey(10) == 27){
-        cv::destroyWindow("Parametrage");
-       return;
-    }
-
 }
 
 
