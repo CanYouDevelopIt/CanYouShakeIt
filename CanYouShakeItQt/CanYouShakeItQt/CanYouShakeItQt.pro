@@ -16,11 +16,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     shakemanager.cpp \
-    joueur.cpp
+    joueur.cpp \
+    score.cpp
 
 HEADERS  += mainwindow.h \
     shakemanager.h \
-    joueur.h
+    joueur.h \
+    score.h
 
 FORMS    += mainwindow.ui
 
