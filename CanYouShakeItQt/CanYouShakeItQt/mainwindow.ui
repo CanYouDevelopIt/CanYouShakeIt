@@ -40,13 +40,13 @@
      <string>Paramètres</string>
     </property>
    </widget>
-   <widget class="QListView" name="listJoueur">
+   <widget class="QListWidget" name="listWidget">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>160</y>
-      <width>371</width>
-      <height>161</height>
+      <x>100</x>
+      <y>180</y>
+      <width>256</width>
+      <height>192</height>
      </rect>
     </property>
    </widget>

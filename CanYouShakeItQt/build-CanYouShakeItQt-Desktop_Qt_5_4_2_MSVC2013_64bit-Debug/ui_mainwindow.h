@@ -14,7 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QListView>
+#include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
@@ -30,7 +30,7 @@ public:
     QWidget *centralWidget;
     QPushButton *start;
     QPushButton *setParameters;
-    QListView *listJoueur;
+    QListWidget *listWidget;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -48,9 +48,9 @@ public:
         setParameters = new QPushButton(centralWidget);
         setParameters->setObjectName(QStringLiteral("setParameters"));
         setParameters->setGeometry(QRect(60, 80, 150, 46));
-        listJoueur = new QListView(centralWidget);
-        listJoueur->setObjectName(QStringLiteral("listJoueur"));
-        listJoueur->setGeometry(QRect(60, 160, 371, 161));
+        listWidget = new QListWidget(centralWidget);
+        listWidget->setObjectName(QStringLiteral("listWidget"));
+        listWidget->setGeometry(QRect(100, 180, 256, 192));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));

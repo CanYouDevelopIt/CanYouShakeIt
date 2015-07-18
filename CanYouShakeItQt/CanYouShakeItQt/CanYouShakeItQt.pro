@@ -5,7 +5,8 @@
 #-------------------------------------------------
 
 QT       += core gui \
-            multimedia
+            multimedia \
+            sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -34,4 +35,5 @@ LIBS += -LC:\OpenCV2411\opencv\build\x64\vc12\lib\
 -lopencv_imgproc2411d\
 
 RESOURCES += \
-    Music/res.qrc
+    Music/res.qrc \
+    bdd/bdd.qrc

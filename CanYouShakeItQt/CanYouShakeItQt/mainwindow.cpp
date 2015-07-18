@@ -4,6 +4,7 @@
 #include <QMediaPlayer>
 #include <QFileDialog>
 #include <QListWidget>
+#include <QtSql>
 
 ShakeManager shakeIt;
 
@@ -36,12 +37,21 @@ void MainWindow::on_setParameters_clicked()
 
 void MainWindow::loadPlayer(){
     std::cout << "LoadTaMere" << std::endl;
+    QSqlDatabase mydb=QSqlDatabase::addDatabase("QSQLITE");
+    QString s = QUrl("../bdd/cysi.db").toString();
+    mydb.setDatabaseName(s);
 
-    //Create Our QListWidget
-    QListWidget *mylist = new QListWidget;
+    if(mydb.open()) {
+        QSqlQuery query("SELECT * FROM joueur");
+            while (query.next()) {
+                QString id = query.value(0).toString();
+                QString joueur = query.value(1).toString();
+                std::cout << id.toStdString() << std::endl;
+                std::cout << joueur.toStdString() << std::endl;
+                ui->listWidget->addItem(joueur);
+            }
+    }
 
-    //Add Our Item To Our List
-    mylist->addItem("itm");
 
 }
 
