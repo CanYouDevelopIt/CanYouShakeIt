@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>937</width>
-    <height>655</height>
+    <width>469</width>
+    <height>457</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <widget class="QPushButton" name="start">
     <property name="geometry">
      <rect>
-      <x>640</x>
+      <x>280</x>
       <y>80</y>
       <width>150</width>
       <height>46</height>
@@ -40,13 +40,23 @@
      <string>Paramètres</string>
     </property>
    </widget>
+   <widget class="QListView" name="listJoueur">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>160</y>
+      <width>371</width>
+      <height>161</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>937</width>
+     <width>469</width>
      <height>21</height>
     </rect>
    </property>

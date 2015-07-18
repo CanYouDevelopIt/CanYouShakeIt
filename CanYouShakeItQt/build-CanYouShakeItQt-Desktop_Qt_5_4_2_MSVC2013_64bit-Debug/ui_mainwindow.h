@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QListView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
@@ -29,6 +30,7 @@ public:
     QWidget *centralWidget;
     QPushButton *start;
     QPushButton *setParameters;
+    QListView *listJoueur;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -37,19 +39,22 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(937, 655);
+        MainWindow->resize(469, 457);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         start = new QPushButton(centralWidget);
         start->setObjectName(QStringLiteral("start"));
-        start->setGeometry(QRect(640, 80, 150, 46));
+        start->setGeometry(QRect(280, 80, 150, 46));
         setParameters = new QPushButton(centralWidget);
         setParameters->setObjectName(QStringLiteral("setParameters"));
         setParameters->setGeometry(QRect(60, 80, 150, 46));
+        listJoueur = new QListView(centralWidget);
+        listJoueur->setObjectName(QStringLiteral("listJoueur"));
+        listJoueur->setGeometry(QRect(60, 160, 371, 161));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 937, 21));
+        menuBar->setGeometry(QRect(0, 0, 469, 21));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));

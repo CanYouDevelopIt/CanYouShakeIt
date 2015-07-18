@@ -21,6 +21,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    void loadPlayer();
 };
 
 #endif // MAINWINDOW_H

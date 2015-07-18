@@ -3,6 +3,7 @@
 #include "shakemanager.h"
 #include <QMediaPlayer>
 #include <QFileDialog>
+#include <QListWidget>
 
 ShakeManager shakeIt;
 
@@ -11,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    loadPlayer();
 }
 
 MainWindow::~MainWindow()
@@ -30,5 +32,16 @@ void MainWindow::on_start_clicked()
 void MainWindow::on_setParameters_clicked()
 {
     shakeIt.setParameters();
+}
+
+void MainWindow::loadPlayer(){
+    std::cout << "LoadTaMere" << std::endl;
+
+    //Create Our QListWidget
+    QListWidget *mylist = new QListWidget;
+
+    //Add Our Item To Our List
+    mylist->addItem("itm");
+
 }
 
