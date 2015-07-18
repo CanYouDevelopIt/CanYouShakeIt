@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    loadPlayers();
 }
 
 MainWindow::~MainWindow()
@@ -29,11 +30,19 @@ void MainWindow::on_start_clicked()
     QListWidgetItem *item = ui->listWidget->currentItem();
 
     if(item != nullptr){
-        std::cout << "test : " << item->text().toStdString() << std::endl;
 
+        String nomJoueur = item->text().toStdString();
+        std::cout << "test : " << nomJoueur << std::endl;
 
+        Joueur *joueur;
 
-        //shakeIt.startGame(music);
+        for(Joueur *j : joueurs)
+            if(j->getNomJoueur() == nomJoueur)
+                joueur = j;
+
+        if(joueur != nullptr)
+            shakeIt.startGame(joueur,music);
+
     }else{
         std::cout << "Erreur" <<std::endl;
     }
@@ -59,7 +68,7 @@ void MainWindow::loadPlayers(){
                 int v = query.value(4).toInt();
 
                 Joueur *j = new Joueur(id,joueur.toStdString(),h,s,v);
-                //joueurs.push_back(j);
+                joueurs.push_back(j);
 
                 ui->listWidget->addItem(joueur);
             }

@@ -100,7 +100,7 @@ bool ShakeManager::rechercherMouvement(Score *scoreJoueur, Mat threshold, Mat HS
     return false;
 }
 
-void ShakeManager::startGame(Joueur* j, QMediaPlayer* music){
+void ShakeManager::startGame(Joueur *j, QMediaPlayer* music){
 
     Score *scoreJoueur = new Score();
     joueur = *j;
