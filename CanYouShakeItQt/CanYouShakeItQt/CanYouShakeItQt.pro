@@ -36,4 +36,3 @@ LIBS += -LC:\OpenCV2411\opencv\build\x64\vc12\lib\
 
 RESOURCES += \
     Music/res.qrc \
-    bdd/bdd.qrc

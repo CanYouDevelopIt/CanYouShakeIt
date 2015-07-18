@@ -45,7 +45,7 @@ void ShakeManager::morphOps(Mat &thresh){
     dilate(thresh, thresh, dilateElement);
 }
 
-bool ShakeManager::rechercherMouvement(Joueur &joueur, Mat threshold, Mat HSV, Mat &cameraFeed, Rect const &fleche){
+bool ShakeManager::rechercherMouvement(Score *scoreJoueur, Mat threshold, Mat HSV, Mat &cameraFeed, Rect const &fleche){
 
     vector <Joueur> mouvements;
 
@@ -81,7 +81,7 @@ bool ShakeManager::rechercherMouvement(Joueur &joueur, Mat threshold, Mat HSV, M
                         son->setMedia(QUrl("qrc:/sounds/power-up.wav"));
                         son->setVolume(5);
                         son->play();
-                        //joueur.setScore(10);
+                        scoreJoueur->addToScore(10);
                         return true;
                     }
 
@@ -101,6 +101,8 @@ bool ShakeManager::rechercherMouvement(Joueur &joueur, Mat threshold, Mat HSV, M
 }
 
 void ShakeManager::startGame(QMediaPlayer* music){
+
+    Score *scoreJoueur = new Score();
 
     music->play();
 
@@ -124,7 +126,7 @@ void ShakeManager::startGame(QMediaPlayer* music){
     Mat imagese = imread("Images/se.png", 0);
     Mat imageso = imread("Images/so.png", 0);
 
-    if (!imageno.data && !imagene.data && !imagese.data && !imageso.data)                              // Check for invalid input
+    if (!imageno.data && !imagene.data && !imagese.data && !imageso.data)
     {
         //Pas d'image
         return;
@@ -165,7 +167,7 @@ void ShakeManager::startGame(QMediaPlayer* music){
         cvtColor(cameraFeed, HSV, COLOR_BGR2HSV);
         inRange(HSV, joueur.getHSVmin(), joueur.getHSVmax(), threshold);
         morphOps(threshold);
-        mouvementTrouver = rechercherMouvement(joueur, threshold, HSV, cameraFeed, randomRect);
+        mouvementTrouver = rechercherMouvement(scoreJoueur, threshold, HSV, cameraFeed, randomRect);
 
         switch(idRect){
             case 0:
@@ -193,8 +195,8 @@ void ShakeManager::startGame(QMediaPlayer* music){
         srcBGR.copyTo(ImageFeed);
 
         flip(cameraFeed,cameraFeed,1);
-        //string score = "Score : " + std::to_string(joueur.getScore());
-        //putText(cameraFeed, score, Point(270, 30), 1, 2, Scalar(0, 0, 255), 2);
+        string score = "Score : " + std::to_string(scoreJoueur->getScore());
+        putText(cameraFeed, score, Point(270, 30), 1, 2, Scalar(0, 0, 255), 2);
         imshow(nomFenetre, cameraFeed);
 
         if(waitKey(10) == 27){
@@ -206,6 +208,8 @@ void ShakeManager::startGame(QMediaPlayer* music){
         if(music->state() == QMediaPlayer::StoppedState)
             musicEnCours = false;
     }
+
+    joueur.addScore(*scoreJoueur);
 
 }
 

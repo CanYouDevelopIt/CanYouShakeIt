@@ -16,7 +16,7 @@ public:
     Score(int _idScore, int _score, string _piste);
     int getScore();
     string getPiste();
-    void setScore(int _score);
+    void addToScore(int _score);
     void setPiste(string _piste);
 };
 

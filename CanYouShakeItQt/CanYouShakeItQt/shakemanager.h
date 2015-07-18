@@ -29,7 +29,7 @@ public :
     void createTrackbars();
     void afficherMouvement(vector<Joueur> &mouvements, Mat &frame);
     void morphOps(Mat &thresh);
-    bool rechercherMouvement(Joueur &joueur, Mat threshold, Mat HSV, Mat &cameraFeed, Rect const &fleche);
+    bool rechercherMouvement(Score *scoreJoueur, Mat threshold, Mat HSV, Mat &cameraFeed, Rect const &fleche);
     void startGame(QMediaPlayer* music);
     void setParameters();
     };

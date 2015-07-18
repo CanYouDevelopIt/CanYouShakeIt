@@ -46,8 +46,6 @@ void MainWindow::loadPlayer(){
             while (query.next()) {
                 QString id = query.value(0).toString();
                 QString joueur = query.value(1).toString();
-                std::cout << id.toStdString() << std::endl;
-                std::cout << joueur.toStdString() << std::endl;
                 ui->listWidget->addItem(joueur);
             }
     }

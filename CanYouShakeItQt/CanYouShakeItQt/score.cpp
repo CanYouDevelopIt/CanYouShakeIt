@@ -2,7 +2,7 @@
 
 Score::Score()
 {
-
+    score = 0;
 }
 
 Score::Score(int _idScore, int _score, string _piste){
@@ -19,8 +19,8 @@ string Score::getPiste(){
     return piste;
 }
 
-void Score::setScore(int _score){
-    score = _score;
+void Score::addToScore(int _score){
+    score += _score;
 }
 
 void Score::setPiste(string _piste){
