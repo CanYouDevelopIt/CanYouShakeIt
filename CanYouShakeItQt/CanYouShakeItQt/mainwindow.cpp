@@ -59,7 +59,7 @@ void MainWindow::loadPlayers(){
                 int v = query.value(4).toInt();
 
                 Joueur *j = new Joueur(id,joueur.toStdString(),h,s,v);
-                //joueurs.push_back(j);
+                joueurs.append(*j);
 
                 ui->listWidget->addItem(joueur);
             }
