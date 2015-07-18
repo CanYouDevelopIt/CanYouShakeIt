@@ -23,7 +23,7 @@ private slots:
     void on_setParameters_clicked();
 
 private:
-    QList<Joueur> joueurs;
+    std::list<Joueur> *joueurs;
     Ui::MainWindow *ui;
     void loadPlayers();
 };
