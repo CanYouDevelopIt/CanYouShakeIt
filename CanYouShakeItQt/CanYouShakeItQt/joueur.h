@@ -2,8 +2,10 @@
 #define JOUEUR_H
 #pragma once
 #include <string>
+#include <list>
 #include <opencv\cv.h>
 #include <opencv\highgui.h>
+#include "score.h"
 
 using namespace cv;
 
@@ -13,7 +15,8 @@ private:
     int xPos, yPos;
     Scalar HSVmin, HSVmax;
     std::string nomJoueur;
-    int score;
+    std::list<Score> mesScores;
+
 public:
     Joueur();
     ~Joueur();
@@ -30,8 +33,7 @@ public:
     void setHSVmax(Scalar max);
     std::string getNomJoueur(){ return nomJoueur; }
     void setNomJoueur(std::string nom){ nomJoueur = nom;}
-    int getScore();
-    void setScore(int _score);
-
+    std::list<Score> getMesScores();
+    void addScore(Score s);
 };
 #endif // JOUEUR_H

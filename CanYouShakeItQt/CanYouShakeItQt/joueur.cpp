@@ -1,10 +1,8 @@
 #include "joueur.h"
 
-
 Joueur::Joueur(){
     setHSVmin(Scalar(0, 0, 0));
     setHSVmax(Scalar(28, 256, 149));
-    score = 0;
 }
 
 Joueur::Joueur(string nom){
@@ -18,15 +16,11 @@ Joueur::Joueur(string nom){
         setHSVmin(Scalar(0, 0, 0));
         setHSVmax(Scalar(15, 116, 242));
     }
-
-    score = 0;
-
 }
 
 Joueur::Joueur(Scalar max){
     HSVmin = Scalar(0,0,0);
     HSVmax = max;
-    score = 0;
 }
 
 Joueur::~Joueur(){
@@ -65,10 +59,11 @@ void Joueur::setHSVmax(Scalar max){
     HSVmax = max;
 }
 
-int Joueur::getScore(){
-    return score;
+std::list<Score> Joueur::getMesScores(){
+    return mesScores;
 }
 
-void Joueur::setScore(int _score){
-    score += _score;
+void Joueur::addScore(Score s){
+    mesScores.push_back(s);
 }
+

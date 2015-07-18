@@ -81,7 +81,7 @@ bool ShakeManager::rechercherMouvement(Joueur &joueur, Mat threshold, Mat HSV, M
                         son->setMedia(QUrl("qrc:/sounds/power-up.wav"));
                         son->setVolume(5);
                         son->play();
-                        joueur.setScore(10);
+                        //joueur.setScore(10);
                         return true;
                     }
 
@@ -105,7 +105,6 @@ void ShakeManager::startGame(QMediaPlayer* music){
     music->play();
 
     bool musicEnCours = true;
-    bool pause = false;
 
     Mat cameraFeed;
     Mat threshold;
@@ -194,8 +193,8 @@ void ShakeManager::startGame(QMediaPlayer* music){
         srcBGR.copyTo(ImageFeed);
 
         flip(cameraFeed,cameraFeed,1);
-        string score = "Score : " + std::to_string(joueur.getScore());
-        putText(cameraFeed, score, Point(270, 30), 1, 2, Scalar(0, 0, 255), 2);
+        //string score = "Score : " + std::to_string(joueur.getScore());
+        //putText(cameraFeed, score, Point(270, 30), 1, 2, Scalar(0, 0, 255), 2);
         imshow(nomFenetre, cameraFeed);
 
         if(waitKey(10) == 27){
