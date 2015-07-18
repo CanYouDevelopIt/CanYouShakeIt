@@ -13,7 +13,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    loadPlayer();
 }
 
 MainWindow::~MainWindow()
@@ -27,7 +26,17 @@ void MainWindow::on_start_clicked()
     QMediaPlayer * music = new QMediaPlayer();
     music->setMedia(QUrl::fromLocalFile(fileName));
 
-    shakeIt.startGame(music);
+    QListWidgetItem *item = ui->listWidget->currentItem();
+
+    if(item != nullptr){
+        std::cout << "test : " << item->text().toStdString() << std::endl;
+
+
+
+        //shakeIt.startGame(music);
+    }else{
+        std::cout << "Erreur" <<std::endl;
+    }
 }
 
 void MainWindow::on_setParameters_clicked()
@@ -35,8 +44,7 @@ void MainWindow::on_setParameters_clicked()
     shakeIt.setParameters();
 }
 
-void MainWindow::loadPlayer(){
-    std::cout << "LoadTaMere" << std::endl;
+void MainWindow::loadPlayers(){
     QSqlDatabase mydb=QSqlDatabase::addDatabase("QSQLITE");
     QString s = QUrl("../bdd/cysi.db").toString();
     mydb.setDatabaseName(s);
@@ -44,12 +52,16 @@ void MainWindow::loadPlayer(){
     if(mydb.open()) {
         QSqlQuery query("SELECT * FROM joueur");
             while (query.next()) {
-                QString id = query.value(0).toString();
+                int id = query.value(0).toInt();
                 QString joueur = query.value(1).toString();
+                int h = query.value(2).toInt();
+                int s = query.value(3).toInt();
+                int v = query.value(4).toInt();
+
+                Joueur *j = new Joueur(id,joueur.toStdString(),h,s,v);
+                //joueurs.push_back(j);
+
                 ui->listWidget->addItem(joueur);
             }
     }
-
-
 }
-

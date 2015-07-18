@@ -23,6 +23,14 @@ Joueur::Joueur(Scalar max){
     HSVmax = max;
 }
 
+
+Joueur::Joueur(int _id, std::string _nomJoueur, int h, int s, int v){
+    idJoueur = _id;
+    nomJoueur = _nomJoueur;
+    setHSVmin(Scalar(0, 0, 0));
+    setHSVmax(Scalar(h, s, v));
+}
+
 Joueur::~Joueur(){
 
 }

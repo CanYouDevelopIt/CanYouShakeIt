@@ -14,6 +14,7 @@ class Joueur
 private:
     int xPos, yPos;
     Scalar HSVmin, HSVmax;
+    int idJoueur;
     std::string nomJoueur;
     std::list<Score> mesScores;
 
@@ -22,6 +23,7 @@ public:
     ~Joueur();
     Joueur(Scalar max);
     Joueur(string nomUser);
+    Joueur(int _id, std::string _nomJoueur, int h, int s, int v);
 
     int getXPos();
     int getYPos();

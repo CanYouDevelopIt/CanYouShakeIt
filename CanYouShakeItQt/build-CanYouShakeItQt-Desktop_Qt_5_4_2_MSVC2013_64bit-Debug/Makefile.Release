@@ -283,6 +283,61 @@ release\moc_mainwindow.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QMainWindow 
 		C:\Qt\5.4\msvc2013_64\include\QtGui\qtouchdevice.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qtabwidget.h \
 		C:\Qt\5.4\msvc2013_64\include\QtGui\qicon.h \
+		..\CanYouShakeItQt\Joueur.h \
+		C:\OpenCV2411\opencv\build\include\opencv\cv.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\core\core_c.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\core\types_c.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\core\core.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\core\version.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\core\operations.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\core\mat.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\imgproc\imgproc_c.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\imgproc\types_c.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\imgproc\imgproc.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\video\tracking.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\features2d\features2d.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\miniflann.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\defines.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\config.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\flann.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\flann_base.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\general.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\matrix.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\params.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\any.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\saving.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\nn_index.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\result_set.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\all_indices.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\kdtree_index.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\dynamic_bitset.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\dist.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\heap.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\allocator.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\random.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\kdtree_single_index.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\kmeans_index.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\logger.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\composite_index.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\linear_index.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\hierarchical_clustering_index.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\lsh_index.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\lsh_table.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\autotuned_index.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\ground_truth.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\index_testing.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\timer.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\sampling.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\calib3d\calib3d.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\core\affine.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\objdetect\objdetect.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\legacy\compat.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\core\internal.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\core\eigen.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv\highgui.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\highgui\highgui_c.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\highgui\highgui.hpp \
+		..\CanYouShakeItQt\score.h \
 		..\CanYouShakeItQt\mainwindow.h
 	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -IC:/Users/Jeremy/Documents/Git/CanYouShakeIt/CanYouShakeItQt/CanYouShakeItQt -IC:/OpenCV2411/opencv/build/include -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtMultimedia -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtNetwork -IC:/Qt/5.4/msvc2013_64/include/QtSql -IC:/Qt/5.4/msvc2013_64/include/QtCore -I. ..\CanYouShakeItQt\mainwindow.h -o release\moc_mainwindow.cpp
 
@@ -412,6 +467,61 @@ release\main.obj: ..\CanYouShakeItQt\main.cpp ..\CanYouShakeItQt\mainwindow.h \
 		C:\Qt\5.4\msvc2013_64\include\QtGui\qtouchdevice.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qtabwidget.h \
 		C:\Qt\5.4\msvc2013_64\include\QtGui\qicon.h \
+		..\CanYouShakeItQt\Joueur.h \
+		C:\OpenCV2411\opencv\build\include\opencv\cv.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\core\core_c.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\core\types_c.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\core\core.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\core\version.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\core\operations.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\core\mat.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\imgproc\imgproc_c.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\imgproc\types_c.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\imgproc\imgproc.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\video\tracking.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\features2d\features2d.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\miniflann.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\defines.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\config.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\flann.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\flann_base.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\general.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\matrix.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\params.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\any.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\saving.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\nn_index.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\result_set.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\all_indices.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\kdtree_index.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\dynamic_bitset.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\dist.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\heap.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\allocator.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\random.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\kdtree_single_index.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\kmeans_index.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\logger.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\composite_index.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\linear_index.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\hierarchical_clustering_index.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\lsh_index.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\lsh_table.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\autotuned_index.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\ground_truth.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\index_testing.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\timer.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\flann\sampling.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\calib3d\calib3d.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\core\affine.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\objdetect\objdetect.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\legacy\compat.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\core\internal.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv2\core\eigen.hpp \
+		C:\OpenCV2411\opencv\build\include\opencv\highgui.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\highgui\highgui_c.h \
+		C:\OpenCV2411\opencv\build\include\opencv2\highgui\highgui.hpp \
+		..\CanYouShakeItQt\score.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QApplication \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qapplication.h \
 		C:\Qt\5.4\msvc2013_64\include\QtCore\qcoreapplication.h \
@@ -526,52 +636,6 @@ release\mainwindow.obj: ..\CanYouShakeItQt\mainwindow.cpp ..\CanYouShakeItQt\mai
 		C:\Qt\5.4\msvc2013_64\include\QtGui\qtouchdevice.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qtabwidget.h \
 		C:\Qt\5.4\msvc2013_64\include\QtGui\qicon.h \
-		ui_mainwindow.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\QVariant \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QAction \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qaction.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qactiongroup.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QApplication \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qapplication.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qcoreapplication.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qeventloop.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qdesktopwidget.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qguiapplication.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qinputmethod.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QButtonGroup \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qbuttongroup.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QHeaderView \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qheaderview.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractitemview.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractscrollarea.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qframe.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qabstractitemmodel.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qitemselectionmodel.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractitemdelegate.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qstyleoption.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractspinbox.h \
-		C:\Qt\5.4\msvc2013_64\include\QtGui\qvalidator.h \
-		C:\Qt\5.4\msvc2013_64\include\QtCore\qregularexpression.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qslider.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractslider.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qstyle.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qtabbar.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qrubberband.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QListWidget \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlistwidget.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlistview.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QMenuBar \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qmenubar.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qmenu.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QPushButton \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qpushbutton.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractbutton.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QStatusBar \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qstatusbar.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QToolBar \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qtoolbar.h \
-		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
-		..\CanYouShakeItQt\shakemanager.h \
 		..\CanYouShakeItQt\Joueur.h \
 		C:\OpenCV2411\opencv\build\include\opencv\cv.h \
 		C:\OpenCV2411\opencv\build\include\opencv2\core\core_c.h \
@@ -627,6 +691,52 @@ release\mainwindow.obj: ..\CanYouShakeItQt\mainwindow.cpp ..\CanYouShakeItQt\mai
 		C:\OpenCV2411\opencv\build\include\opencv2\highgui\highgui_c.h \
 		C:\OpenCV2411\opencv\build\include\opencv2\highgui\highgui.hpp \
 		..\CanYouShakeItQt\score.h \
+		ui_mainwindow.h \
+		C:\Qt\5.4\msvc2013_64\include\QtCore\QVariant \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QAction \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qaction.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qactiongroup.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QApplication \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qapplication.h \
+		C:\Qt\5.4\msvc2013_64\include\QtCore\qcoreapplication.h \
+		C:\Qt\5.4\msvc2013_64\include\QtCore\qeventloop.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qdesktopwidget.h \
+		C:\Qt\5.4\msvc2013_64\include\QtGui\qguiapplication.h \
+		C:\Qt\5.4\msvc2013_64\include\QtGui\qinputmethod.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QButtonGroup \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qbuttongroup.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QHeaderView \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qheaderview.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractitemview.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractscrollarea.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qframe.h \
+		C:\Qt\5.4\msvc2013_64\include\QtCore\qabstractitemmodel.h \
+		C:\Qt\5.4\msvc2013_64\include\QtCore\qitemselectionmodel.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractitemdelegate.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qstyleoption.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractspinbox.h \
+		C:\Qt\5.4\msvc2013_64\include\QtGui\qvalidator.h \
+		C:\Qt\5.4\msvc2013_64\include\QtCore\qregularexpression.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qslider.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractslider.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qstyle.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qtabbar.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qrubberband.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QListWidget \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlistwidget.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlistview.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QMenuBar \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qmenubar.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qmenu.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QPushButton \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qpushbutton.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractbutton.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QStatusBar \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qstatusbar.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QToolBar \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qtoolbar.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget \
+		..\CanYouShakeItQt\shakemanager.h \
 		C:\Qt\5.4\msvc2013_64\include\QtMultimedia\QMediaPlayer \
 		C:\Qt\5.4\msvc2013_64\include\QtMultimedia\qmediaplayer.h \
 		C:\Qt\5.4\msvc2013_64\include\QtMultimedia\qmediaobject.h \

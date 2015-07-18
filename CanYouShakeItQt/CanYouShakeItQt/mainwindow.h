@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <String>
+#include <list>
+#include "Joueur.h"
 
 namespace Ui {
 class MainWindow;
@@ -20,8 +23,9 @@ private slots:
     void on_setParameters_clicked();
 
 private:
+    std::list<Joueur> *joueurs;
     Ui::MainWindow *ui;
-    void loadPlayer();
+    void loadPlayers();
 };
 
 #endif // MAINWINDOW_H
