@@ -501,7 +501,7 @@ debug\moc_mainwindow.cpp: C:\Qt\5.4\msvc2013_64\include\QtWidgets\QMainWindow \
 		..\CanYouShakeItQt\score.h \
 		..\CanYouShakeItQt\shakemanager.h \
 		..\CanYouShakeItQt\mainwindow.h
-	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -IC:/Users/Jeremy/Documents/Git/CanYouShakeIt/CanYouShakeItQt/CanYouShakeItQt -IC:/OpenCV2411/opencv/build/include -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtMultimedia -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtNetwork -IC:/Qt/5.4/msvc2013_64/include/QtSql -IC:/Qt/5.4/msvc2013_64/include/QtCore -I. ..\CanYouShakeItQt\mainwindow.h -o debug\moc_mainwindow.cpp
+	C:\Qt\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/5.4/msvc2013_64/mkspecs/win32-msvc2013 -IC:/Users/Yolo/Documents/GitHub/CanYouShakeIt/CanYouShakeItQt/CanYouShakeItQt -IC:/OpenCV2411/opencv/build/include -IC:/Qt/5.4/msvc2013_64/include -IC:/Qt/5.4/msvc2013_64/include/QtMultimedia -IC:/Qt/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/5.4/msvc2013_64/include/QtGui -IC:/Qt/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/5.4/msvc2013_64/include/QtNetwork -IC:/Qt/5.4/msvc2013_64/include/QtSql -IC:/Qt/5.4/msvc2013_64/include/QtCore -I. ..\CanYouShakeItQt\mainwindow.h -o debug\moc_mainwindow.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -1186,6 +1186,8 @@ debug\mainwindow.obj: ..\CanYouShakeItQt\mainwindow.cpp ..\CanYouShakeItQt\mainw
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qbuttongroup.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QHeaderView \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qheaderview.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QLabel \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qlabel.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QMenuBar \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qmenubar.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qmenu.h \
@@ -1194,6 +1196,13 @@ debug\mainwindow.obj: ..\CanYouShakeItQt\mainwindow.cpp ..\CanYouShakeItQt\mainw
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qabstractbutton.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QStatusBar \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qstatusbar.h \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QTextEdit \
+		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qtextedit.h \
+		C:\Qt\5.4\msvc2013_64\include\QtGui\qtextdocument.h \
+		C:\Qt\5.4\msvc2013_64\include\QtGui\qtextoption.h \
+		C:\Qt\5.4\msvc2013_64\include\QtGui\qtextcursor.h \
+		C:\Qt\5.4\msvc2013_64\include\QtGui\qtextformat.h \
+		C:\Qt\5.4\msvc2013_64\include\QtGui\qpen.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QToolBar \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\qtoolbar.h \
 		C:\Qt\5.4\msvc2013_64\include\QtWidgets\QWidget

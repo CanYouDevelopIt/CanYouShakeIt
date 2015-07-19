@@ -36,5 +36,6 @@ public:
     void setNomJoueur(std::string nom){ nomJoueur = nom;}
     std::list<Score> getMesScores();
     void addScore(Score s);
+    void saveJoueur(int h,int s, int v);
 };
 #endif // JOUEUR_H

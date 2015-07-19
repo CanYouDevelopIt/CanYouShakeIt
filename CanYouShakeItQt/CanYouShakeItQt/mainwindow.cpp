@@ -46,7 +46,13 @@ void MainWindow::on_start_clicked()
 
 void MainWindow::on_setParameters_clicked()
 {
-    shakeIt.setParameters();
+    string newName = ui->nouveauJoueur->toPlainText().toStdString();
+    if(!newName.empty()){
+        std::cout << " New Name " << newName << endl ;
+        shakeIt.setParameters(newName);
+    }else{
+        ui->enterNameLabel->setText(" Entrez un nom ");
+    }
 }
 
 void MainWindow::loadPlayers(){

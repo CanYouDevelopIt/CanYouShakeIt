@@ -216,7 +216,7 @@ void ShakeManager::startGame(Joueur *j, QMediaPlayer* music, string nomPiste){
 
 }
 
-void ShakeManager::setParameters(){
+void ShakeManager::setParameters(string newName){
 
     Mat cameraFeed;
     Mat threshold;
@@ -248,7 +248,9 @@ void ShakeManager::setParameters(){
             int h_max = getTrackbarPos("H_MAX", "Parametrage");
             int s_max = getTrackbarPos("S_MAX", "Parametrage");
             int v_max = getTrackbarPos("V_MAX", "Parametrage");
-            //joueur = Joueur(Scalar(h_max,s_max,v_max));
+            joueur.setNomJoueur(newName);
+            joueur.setHSVmax(Scalar(h_max,s_max,v_max));
+            joueur.saveJoueur(h_max,s_max,v_max);
             destroyWindow("Parametrage");
             return;
         }

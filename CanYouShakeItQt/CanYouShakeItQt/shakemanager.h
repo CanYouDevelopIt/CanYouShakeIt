@@ -31,7 +31,7 @@ public :
     void morphOps(Mat &thresh);
     bool rechercherMouvement(Score *scoreJoueur, Mat threshold, Mat HSV, Mat &cameraFeed, Rect const &fleche);
     void startGame(Joueur *j, QMediaPlayer* music, string nomPiste);
-    void setParameters();
+    void setParameters(string newName);
     };
 
 #endif // SHAKEMANAGER_H
