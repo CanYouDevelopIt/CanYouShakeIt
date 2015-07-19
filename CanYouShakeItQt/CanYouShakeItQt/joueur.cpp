@@ -78,10 +78,12 @@ void Joueur::addScore(Score s){
     QString sDatabase = QUrl("../bdd/cysi.db").toString();
     mydb.setDatabaseName(sDatabase);
 
-    int score = s.getScore();
+    QString queryString;
+    QTextStream queryStream(&queryString);
+    queryStream << "INSERT INTO SCORE(score, idJoueur) VALUES(" << s.getScore() << "," << idJoueur << + ")";
 
     if(mydb.open()){
-        QSqlQuery query("INSERT INTO SCORE(score, idJoueur) VALUES(" + score + "," + idJoueur + ")");
+        QSqlQuery query(queryString);
     }
 
 }
