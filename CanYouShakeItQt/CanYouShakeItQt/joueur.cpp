@@ -66,6 +66,7 @@ void Joueur::addScore(Score s){
 
     if(mydb.open()){
         QSqlQuery query(queryString);
+        mydb.close();
     }
 }
 
@@ -78,14 +79,11 @@ void Joueur::saveJoueur(int h,int s, int v){
     QString newName = QString::fromStdString(nomJoueur);
     QString queryString;
     QTextStream queryStream(&queryString);
-    queryStream << "INSERT INTO JOUEUR(nomJoueur, h, s, v) VALUES('" << newName << "'," << h << "," << s << "," << v << ")";
-    std::cout<< " Query ==>" << queryString.toStdString()<<endl;
+    queryStream << "INSERT INTO JOUEUR(nomJoueur, hMax, sMax, vMax) VALUES('" << newName << "'," << h << "," << s << "," << v << ")";
 
     if(mydb.open()){
-        std::cout<<"Cool"<<std::endl;
         QSqlQuery query(queryString);
-    }else{
-        std::cout<<"Error"<<std::endl;
+        mydb.close();
     }
 }
 
