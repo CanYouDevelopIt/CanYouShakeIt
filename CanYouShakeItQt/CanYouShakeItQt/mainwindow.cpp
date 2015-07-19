@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     loadPlayers();
+    loadBestScores();
 }
 
 MainWindow::~MainWindow()
@@ -25,9 +26,11 @@ void MainWindow::on_start_clicked()
     QStringList myStringList = fileName.split('/').last().split('/');
     string nomPiste = myStringList.first().toStdString();
 
-    QListWidgetItem *item = ui->listWidget->currentItem();
+    QListWidgetItem *item = ui->listJoueurs->currentItem();
 
     if(item != nullptr){
+
+        ui->labelSelectJoueur->clear();
 
         String nomJoueur = item->text().toStdString();
         Joueur *joueur;
@@ -36,11 +39,14 @@ void MainWindow::on_start_clicked()
             if(j->getNomJoueur() == nomJoueur)
                 joueur = j;
 
-        if(joueur != nullptr)
+        if(joueur != nullptr){
             shakeIt.startGame(joueur,music,nomPiste);
+            QString qNomPiste = QString::fromStdString(nomPiste);
+            loadPisteScores(qNomPiste);
+        }
 
     }else{
-        std::cout << "Erreur" <<std::endl;
+        ui->labelSelectJoueur->setText("Veuillez sélectionner un joueur");
     }
 }
 
@@ -48,8 +54,8 @@ void MainWindow::on_setParameters_clicked()
 {
     string newName = ui->nouveauJoueur->toPlainText().toStdString();
     if(!newName.empty()){
-        std::cout << " New Name " << newName << endl ;
         shakeIt.setParameters(newName);
+        loadPlayers();
     }else{
         ui->enterNameLabel->setText(" Entrez un nom ");
     }
@@ -61,6 +67,9 @@ void MainWindow::loadPlayers(){
     mydb.setDatabaseName(s);
 
     if(mydb.open()) {
+        joueurs.clear();
+        ui->listJoueurs->clear();
+
         QSqlQuery query("SELECT * FROM joueur");
             while (query.next()) {
                 int id = query.value(0).toInt();
@@ -72,7 +81,52 @@ void MainWindow::loadPlayers(){
                 Joueur *j = new Joueur(id,joueur.toStdString(),h,s,v);
                 joueurs.push_back(j);
 
-                ui->listWidget->addItem(joueur);
+                ui->listJoueurs->addItem(joueur);
             }
+        mydb.close();
     }
+
+}
+
+void MainWindow::loadBestScores(){
+    QSqlDatabase mydb=QSqlDatabase::addDatabase("QSQLITE");
+    QString s = QUrl("../bdd/cysi.db").toString();
+    mydb.setDatabaseName(s);
+
+    if(mydb.open()) {
+        ui->listScores->clear();
+        ui->labelScore->setText("Top scores");
+
+        QSqlQuery query("SELECT DISTINCT piste, nomJoueur, score FROM Joueur j, Score s WHERE j.idJoueur = s.idJoueur GROUP BY piste ORDER BY score DESC");
+            while (query.next()) {
+                QString piste = query.value(0).toString();
+                QString joueur = query.value(1).toString();
+                QString score = query.value(2).toString();
+
+                ui->listScores->addItem(piste + " : " + score + " de " + joueur);
+        }
+        mydb.close();
+    }
+
+}
+
+void MainWindow::loadPisteScores(QString nomPiste){
+    QSqlDatabase mydb=QSqlDatabase::addDatabase("QSQLITE");
+    QString s = QUrl("../bdd/cysi.db").toString();
+    mydb.setDatabaseName(s);
+
+    if(mydb.open()) {
+        ui->listScores->clear();
+        ui->labelScore->setText("Top scores : " + nomPiste);
+
+        QSqlQuery query("SELECT nomJoueur, score FROM Joueur j, Score s WHERE j.idJoueur = s.idJoueur AND piste = '" + nomPiste + "' ORDER BY score DESC");
+            while (query.next()) {
+                QString joueur = query.value(0).toString();
+                QString score = query.value(1).toString();
+
+                ui->listScores->addItem(joueur + " : " + score);
+        }
+        mydb.close();
+    }
+
 }

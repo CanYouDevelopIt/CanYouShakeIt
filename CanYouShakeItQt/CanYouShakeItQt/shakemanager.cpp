@@ -7,7 +7,6 @@
 #include<MMSystem.h>
 #include <QMediaPlayer>
 
-using namespace std;
 using namespace cv;
 
 ShakeManager::ShakeManager()

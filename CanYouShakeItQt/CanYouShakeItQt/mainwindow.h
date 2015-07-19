@@ -31,6 +31,8 @@ private:
     std::list<Joueur*> joueurs;
     Ui::MainWindow *ui;
     void loadPlayers();
+    void loadBestScores();
+    void loadPisteScores(QString nomPiste);
 };
 
 #endif // MAINWINDOW_H
