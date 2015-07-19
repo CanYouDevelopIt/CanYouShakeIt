@@ -73,5 +73,16 @@ std::list<Score> Joueur::getMesScores(){
 
 void Joueur::addScore(Score s){
     mesScores.push_back(s);
+
+    QSqlDatabase mydb=QSqlDatabase::addDatabase("QSQLITE");
+    QString sDatabase = QUrl("../bdd/cysi.db").toString();
+    mydb.setDatabaseName(sDatabase);
+
+    int score = s.getScore();
+
+    if(mydb.open()){
+        QSqlQuery query("INSERT INTO SCORE(score, idJoueur) VALUES(" + score + "," + idJoueur + ")");
+    }
+
 }
 

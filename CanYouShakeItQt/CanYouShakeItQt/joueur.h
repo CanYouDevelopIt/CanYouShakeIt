@@ -5,6 +5,7 @@
 #include <list>
 #include <opencv\cv.h>
 #include <opencv\highgui.h>
+#include <QtSql>
 #include "score.h"
 
 using namespace cv;
