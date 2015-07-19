@@ -100,9 +100,11 @@ bool ShakeManager::rechercherMouvement(Score *scoreJoueur, Mat threshold, Mat HS
     return false;
 }
 
-void ShakeManager::startGame(Joueur *j, QMediaPlayer* music){
+void ShakeManager::startGame(Joueur *j, QMediaPlayer* music, string nomPiste){
 
     Score *scoreJoueur = new Score();
+    scoreJoueur->setPiste(nomPiste);
+
     joueur = *j;
 
     music->play();
@@ -246,7 +248,7 @@ void ShakeManager::setParameters(){
             int h_max = getTrackbarPos("H_MAX", "Parametrage");
             int s_max = getTrackbarPos("S_MAX", "Parametrage");
             int v_max = getTrackbarPos("V_MAX", "Parametrage");
-            joueur = Joueur(Scalar(h_max,s_max,v_max));
+            //joueur = Joueur(Scalar(h_max,s_max,v_max));
             destroyWindow("Parametrage");
             return;
         }

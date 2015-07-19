@@ -1,10 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "shakemanager.h"
-#include <QMediaPlayer>
-#include <QFileDialog>
-#include <QListWidget>
-#include <QtSql>
 
 ShakeManager shakeIt;
 
@@ -27,13 +22,14 @@ void MainWindow::on_start_clicked()
     QMediaPlayer * music = new QMediaPlayer();
     music->setMedia(QUrl::fromLocalFile(fileName));
 
+    QStringList myStringList = fileName.split('/').last().split('/');
+    string nomPiste = myStringList.first().toStdString();
+
     QListWidgetItem *item = ui->listWidget->currentItem();
 
     if(item != nullptr){
 
         String nomJoueur = item->text().toStdString();
-        std::cout << "test : " << nomJoueur << std::endl;
-
         Joueur *joueur;
 
         for(Joueur *j : joueurs)
@@ -41,7 +37,7 @@ void MainWindow::on_start_clicked()
                 joueur = j;
 
         if(joueur != nullptr)
-            shakeIt.startGame(joueur,music);
+            shakeIt.startGame(joueur,music,nomPiste);
 
     }else{
         std::cout << "Erreur" <<std::endl;
