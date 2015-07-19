@@ -22,8 +22,6 @@ private:
 public:
     Joueur();
     ~Joueur();
-    Joueur(Scalar max);
-    Joueur(string nomUser);
     Joueur(int _id, std::string _nomJoueur, int h, int s, int v);
 
     int getXPos();

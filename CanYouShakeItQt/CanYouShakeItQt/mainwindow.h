@@ -2,9 +2,14 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMediaPlayer>
+#include <QFileDialog>
+#include <QListWidget>
+#include <QtSql>
 #include <String>
 #include <list>
 #include "Joueur.h"
+#include "shakemanager.h"
 
 namespace Ui {
 class MainWindow;

@@ -5,25 +5,6 @@ Joueur::Joueur(){
     setHSVmax(Scalar(28, 256, 149));
 }
 
-Joueur::Joueur(string nom){
-
-    nomJoueur = nom;
-    if (nomJoueur == "Jeremy"){
-        setHSVmin(Scalar(0, 0, 0));
-        setHSVmax(Scalar(28, 256, 149));
-    }
-    if (nomJoueur == "Pascal"){
-        setHSVmin(Scalar(0, 0, 0));
-        setHSVmax(Scalar(15, 116, 242));
-    }
-}
-
-Joueur::Joueur(Scalar max){
-    HSVmin = Scalar(0,0,0);
-    HSVmax = max;
-}
-
-
 Joueur::Joueur(int _id, std::string _nomJoueur, int h, int s, int v){
     idJoueur = _id;
     nomJoueur = _nomJoueur;
@@ -78,9 +59,10 @@ void Joueur::addScore(Score s){
     QString sDatabase = QUrl("../bdd/cysi.db").toString();
     mydb.setDatabaseName(sDatabase);
 
+    QString nomPiste = QString::fromStdString(s.getPiste());
     QString queryString;
     QTextStream queryStream(&queryString);
-    queryStream << "INSERT INTO SCORE(score, idJoueur) VALUES(" << s.getScore() << "," << idJoueur << + ")";
+    queryStream << "INSERT INTO SCORE(score, piste, idJoueur) VALUES(" << s.getScore() << ",'" << nomPiste << "'," << idJoueur << ")";
 
     if(mydb.open()){
         QSqlQuery query(queryString);

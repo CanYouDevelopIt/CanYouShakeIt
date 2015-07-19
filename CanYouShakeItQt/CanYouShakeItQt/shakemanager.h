@@ -30,7 +30,7 @@ public :
     void afficherMouvement(vector<Joueur> &mouvements, Mat &frame);
     void morphOps(Mat &thresh);
     bool rechercherMouvement(Score *scoreJoueur, Mat threshold, Mat HSV, Mat &cameraFeed, Rect const &fleche);
-    void startGame(Joueur *j, QMediaPlayer* music);
+    void startGame(Joueur *j, QMediaPlayer* music, string nomPiste);
     void setParameters();
     };
 
